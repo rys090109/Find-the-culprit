@@ -1,0 +1,77 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: 
+        url(../assets/image/main.png);
+    background-size: cover;
+    background-position: center;
+    font-family: 'Pretendard', sans-serif;
+}
+
+#logo{
+    letter-spacing: 4px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #C9A227;
+    margin: 0 0 20px;
+}
+
+#logos{
+    font-size: 56px;
+    font-weight: 800;
+    color: #F3E8C5;
+    margin: 0 0 38px;
+}
+
+.subtitle{
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0 0 24px;
+}
+
+#start_game{
+    background-color: #D4AF5A;
+    color: #2A1F0F;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 60px;
+    cursor: pointer;
+    margin: 0 0 36px;
+    transition: background-color 0.2s ease;
+}
+
+#start_game:hover{
+    background-color: #C29A45;
+}
+
+#login,
+#join{
+    background: none;
+    border: none;
+    padding: 0 12px;
+}
+
+.auth-links{
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+#login a,
+#join a{
+    color: #FFFFFF;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#login a:hover,
+#join a:hover{
+    text-decoration: underline;
+}

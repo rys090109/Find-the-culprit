@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: 
+        url(../assets/image/main.png);
+    background-size: cover;
+    background-position: center;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.back-link {
+    position: fixed;
+    top: 42px;
+    left: 58px;
+    color: #FFFFFF;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+    text-decoration: none;
+}
+
+#logo {
+    position: fixed;
+    top: 90px;
+    color: #C9A227;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+
+.join-card {
+    box-sizing: border-box;
+    width: min(428px, calc(100% - 32px));
+    min-height: 436px;
+    padding: 40px 30px 34px;
+    border-radius: 18px;
+    background: #031027;
+}
+
+.join-card h1 {
+    margin: 0 0 28px;
+    color: #F5F5F5;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.join-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.join-card input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 56px;
+    padding: 0 20px;
+    border: 1px solid #172131;
+    border-radius: 12px;
+    outline: none;
+    background: #202D3D;
+    color: #FFFFFF;
+    font: inherit;
+    font-size: 16px;
+}
+
+.join-card input:focus {
+    border-color: #D4AF5A;
+}
+
+.join-card button {
+    height: 56px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #E9B83F;
+    color: #152035;
+    font: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.join-card button:hover {
+    background: #D4A52F;
+}
