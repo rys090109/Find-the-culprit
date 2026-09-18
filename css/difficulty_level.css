@@ -1,3 +1,88 @@
-body{
+body {
     background-color: #050D1F;
+    margin: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
+
+#head {
+    text-align: center;
+    color: #fbfbfb;
+    padding-top: 60px;
+}
+
+.back-link {
+    position: fixed;
+    top: 42px;
+    left: 58px;
+    color: #FFFFFF;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    gap: 50px 70px;
+    max-width: 750px;
+    margin: 40px auto;
+}
+
+.difficulty-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+    transition: transform 0.15s ease;
+}
+
+.difficulty-item img {
+    width: 170px;
+    display: block;
+    filter: brightness(0.85);
+    transition: filter 0.15s ease;
+}
+
+.difficulty-item.selected {
+    transform: scale(1.08);
+}
+
+.difficulty-item.selected img {
+    filter: brightness(1.2) drop-shadow(0 0 12px gold);
+}
+
+.stars {
+    font-size: 28px;
+    letter-spacing: 4px;
+}
+
+.stars span {
+    color: #4b4b55; 
+}
+
+.stars span.filled {
+    color: #e0b632;
+}
+
+.open-file-btn {
+    display: block;
+    margin: 50px auto 0;
+    padding: 16px 60px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #050D1F;
+    background: linear-gradient(180deg, #e6c96a, #d4a938);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+

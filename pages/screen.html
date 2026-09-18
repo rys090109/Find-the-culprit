@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사건 파일</title>
+    <link rel="stylesheet" href="../css/screen.css">
+</head>
+<body>
+
+    <section id="scene-story" class="scene active">
+        <div class="scene-bg">
+            <img id="bg-image" src="../assets/image/radio.png" alt="배경">
+            <div class="top-bar">
+                <h1 id="story-title"></h1>
+                <div class="timer"><span id="story-time"></span></div>
+            </div>
+
+            <div id="clue-markers"></div>
+
+            <div id="story-text" class="story-box"></div>
+
+            <button id="next-btn" class="arrow-btn" aria-label="다음 화면으로">&rarr;</button>
+        </div>
+    </section>
+
+    <section id="scene-suspects" class="scene">
+        <button id="back-btn" class="back-link" aria-label="이전 화면으로">&larr;</button>
+        <div class="top-bar center">
+            <h1>범인 선택</h1>
+            <div class="timer"><span id="suspect-time"></span></div>
+        </div>
+
+        <div id="suspect-grid" class="suspect-grid"></div>
+
+        <button id="check-btn" class="check-btn">정답 확인</button>
+    </section>
+
+    <div id="clue-popup" class="popup hidden">
+        <div class="popup-box">
+            <p id="clue-text"></p>
+            <button id="clue-close" class="popup-close">닫기</button>
+        </div>
+    </div>
+
+    <div id="result-popup" class="popup hidden">
+        <div class="popup-box">
+            <p id="result-text"></p>
+            <button id="result-close" class="popup-close">확인</button>
+        </div>
+    </div>
+
+    <script src="../js/screen.js"></script>
+</body>
+</html>

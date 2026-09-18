@@ -1,12 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>난이도 선택</title>
     <link rel="stylesheet" href="../css/difficulty_level.css">
 </head>
 <body>
-    
+    <a class="back-link" href="./start.html" aria-label="시작 화면으로 돌아가기">&larr;</a>
+
+    <h1 id="head">난이도를 선택하세요</h1>
+
+    <div class="difficulty-grid">
+        <button class="difficulty-item" data-level="1">
+            <img src="../assets/image/file.png" alt="난이도 1">
+            <img class="stars" src="../assets/image/difficulty_level_1.png" alt="별 1개">
+        </button>
+        <button class="difficulty-item" data-level="2">
+            <img src="../assets/image/file.png" alt="난이도 2">
+            <img class="stars" src="../assets/image/difficulty_level_2.png" alt="별 2개">
+        </button>
+        <button class="difficulty-item" data-level="3">
+            <img src="../assets/image/file.png" alt="난이도 3">
+            <img class="stars" src="../assets/image/difficulty_level_3.png" alt="별 3개">
+        </button>
+        <button class="difficulty-item" data-level="4">
+            <img src="../assets/image/file.png" alt="난이도 4">
+            <img class="stars" src="../assets/image/difficulty_level_4.png" alt="별 4개">
+        </button>
+        <button class="difficulty-item" data-level="5">
+            <img src="../assets/image/file.png" alt="난이도 5">
+            <img class="stars" src="../assets/image/difficulty_level_5.png" alt="별 5개">
+        </button>
+    </div>
+
+    <button class="open-file-btn">사건 파일 열기</button>
+
+    <script src="../js/difficulty_level.js"></script>
 </body>
 </html>
