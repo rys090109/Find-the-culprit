@@ -85,4 +85,111 @@ body {
     transition: transform 0.15s ease, filter 0.15s ease;
 }
 
+/* ---------- 룰렛 개봉 오버레이 ---------- */
+.reveal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 13, 31, 0.94);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    z-index: 200;
+}
 
+.reveal-overlay.hidden {
+    display: none;
+}
+
+.roulette-viewport {
+    position: relative;
+    width: 600px;
+    max-width: 85vw;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.roulette-item {
+    flex-shrink: 0;
+    width: 420px;
+    height: 100%;
+    margin-right: 16px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 6px;
+    filter: brightness(0.6) saturate(0.85);
+}
+
+.roulette-marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 420px;
+    height: 100%;
+    transform: translateX(-50%);
+    border: 2px solid #e6c96a;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(230, 201, 106, 0.5);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.roulette-viewport::before,
+.roulette-viewport::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.roulette-viewport::before {
+    left: 0;
+    background: linear-gradient(90deg, #050D1F, transparent);
+}
+
+.roulette-viewport::after {
+    right: 0;
+    background: linear-gradient(270deg, #050D1F, transparent);
+}
+
+.roulette-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    will-change: transform;
+}
+
+.roulette-item.chosen {
+    filter: brightness(1) saturate(1);
+}
+
+.reveal-label {
+    color: #e9e9ee;
+    font-family: Georgia, "Noto Serif KR", serif;
+    font-size: 17px;
+    letter-spacing: 3px;
+    opacity: 0.85;
+    text-align: center;
+    min-height: 24px;
+    transition: opacity 0.4s ease;
+}
+
+.reveal-underline {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e6c96a, transparent);
+    transition: width 1.2s ease;
+}
+
+.reveal-underline.grow {
+    width: 220px;
+}

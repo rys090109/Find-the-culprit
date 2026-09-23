@@ -1,49 +1,152 @@
 [
-{
-  "id": "level1",
-  "title": "라디오 사연 유출 사건",
-  "background": "radio",
-  "story": "학교 방송반은 점심시간마다 학생들의 고민 사연을 익명으로 받아 소개하는 코너를 오래도록 운영해왔다. 이번 방송을 앞두고도 사연 몇 개가 접수됐고, 부원들이 방송용으로 문장을 다듬는 작업까지 마친 상태였다. 그런데 방송 전날 저녁, 접수된 사연 중 하나가 SNS 익명 게시판에 그대로 캡처되어 올라오면서 학교가 발칵 뒤집혔다. 문제는 유출된 글이 학생이 처음 제출한 원문이 아니라 방송 직전 다듬어진 수정본이었다는 점이다. 원본만 봐서는 알 수 없는 문장이었기에, 수정 작업을 마친 최종본을 직접 확인한 사람이 유력하다.",
-  "clues": [
-    {
-      "id": "key1",
-      "label": "선반 위 열쇠",
-      "text": "유출된 글에는 방송용으로 수정된 문장이 그대로 포함되어 있었다."
-    },
-    {
-      "id": "key2",
-      "label": "부스 위 열쇠",
-      "text": "방송반 부원과 담당 선생님은 수정 전 원고만 확인했다."
-    },
-    {
-      "id": "key3",
-      "label": "정수기 옆 열쇠",
-      "text": "수정된 원고는 편집 프로그램에서만 열람할 수 있었다."
-    }
-  ],
-  "suspects": [
-    {
-      "id": "broadcast_member",
-      "name": "방송부원",
-      "icon": "mike"
-    },
-    {
-      "id": "teacher",
-      "name": "담당선생님",
-      "icon": "teacher"
-    },
-    {
-      "id": "manager",
-      "name": "관리자",
-      "icon": "laptop"
-    },
-    {
-      "id": "cleaner",
-      "name": "방송실 청소부",
-      "icon": "broomstick"
-    }
-  ],
-  "answer": "manager"
-}
-
+  {
+    "id": "level1_scenario1",
+    "title": "라디오 사연 유출 사건",
+    "background": "radio",
+    "story": "학교 방송반은 점심시간마다 학생들의 고민 사연을 익명으로 받아 소개하는 코너를 오래도록 운영해왔다. 이번 방송을 앞두고도 사연 몇 개가 접수됐고, 부원들이 방송용으로 문장을 다듬는 작업까지 마친 상태였다. 그런데 방송 전날 저녁, 접수된 사연 중 하나가 SNS 익명 게시판에 그대로 캡처되어 올라오면서 학교가 발칵 뒤집혔다. 문제는 유출된 글이 학생이 처음 제출한 원문이 아니라 방송 직전 다듬어진 수정본이었다는 점이다. 원본만 봐서는 알 수 없는 문장이었기에, 수정 작업을 마친 최종본을 직접 확인한 사람이 유력하다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "선반 위 열쇠",
+        "text": "방송반 부원과 담당 선생님은 수정 전 원고만 확인했다."
+      },
+      {
+        "id": "key2",
+        "label": "부스 위 열쇠",
+        "text": "수정된 원고는 편집 프로그램에서만 열람할 수 있었다."
+      },
+      {
+        "id": "key3",
+        "label": "정수기 옆 열쇠",
+        "text": "유출 직전 관리자 계정의 마지막 접속 기록이 확인됐다."
+      }
+    ],
+    "suspects": [
+      { "id": "broadcast_member", "name": "방송부원", "icon": "mike" },
+      { "id": "teacher", "name": "담당선생님", "icon": "teacher" },
+      { "id": "manager", "name": "편집 프로그램 관리자", "icon": "laptop" },
+      { "id": "cleaner", "name": "방송실 청소 담당", "icon": "broomstick" }
+    ],
+    "answer": "manager"
+  },
+  {
+    "id": "level1_scenario2",
+    "title": "아파트 분리수거장 택배 상자 도난 사건",
+    "background": "apartment",
+    "story": "한 입주민이 자전거 상자를 분리수거장에 잠깐 세워두고 자리를 비운 사이 상자가 사라졌다. 분리수거장에는 CCTV 사각지대로 이어지는 통로가 있었는데, 평소 그 길을 아는 사람만 이용할 수 있었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "왼쪽 위 열쇠",
+        "text": "미화원은 그 시간 반대편 동을 청소하고 있었다."
+      },
+      {
+        "id": "key2",
+        "label": "가운데 위 열쇠",
+        "text": "경비원은 초소에서 CCTV를 계속 확인하고 있었다."
+      },
+      {
+        "id": "key3",
+        "label": "오른쪽 아래 열쇠",
+        "text": "자전거 동호회 이웃이 사각지대 통로로 급히 빠져나가는 모습이 목격됐다."
+      }
+    ],
+    "suspects": [
+      { "id": "bike_neighbor", "name": "자전거 동호회 이웃", "icon": "person_silhouette" },
+      { "id": "janitor", "name": "미화원", "icon": "broomstick" },
+      { "id": "guard", "name": "경비원", "icon": "guard" },
+      { "id": "neighbor", "name": "옆 동 주민", "icon": "couple" }
+    ],
+    "answer": "bike_neighbor"
+  },
+  {
+    "id": "level1_scenario3",
+    "title": "편의점 한정판 아이스크림 재고 부족 사건",
+    "background": "icecream",
+    "story": "한정판 아이스크림이 입고된 날, 사장님이 재고를 세어 냉동고에 넣어뒀는데 다음 날 다섯 개가 비어 있었다. 냉동고는 직원 카드키로만 열리고, 그날 새벽 잠깐 들른 사람은 단 한 명뿐이었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "선반 위 열쇠",
+        "text": "사장님은 재고를 센 뒤 곧바로 퇴근했다."
+      },
+      {
+        "id": "key2",
+        "label": "천장 옆 열쇠",
+        "text": "배송 기사는 물건만 놓고 서명받은 뒤 떠났다."
+      },
+      {
+        "id": "key3",
+        "label": "계산대 옆 열쇠",
+        "text": "냉동고 카드키 사용 기록이 발주 담당 아르바이트생의 출근 시각과 일치했다."
+      }
+    ],
+    "suspects": [
+      { "id": "parttimer", "name": "아르바이트생", "icon": "parttimer" },
+      { "id": "store_owner", "name": "편의점 사장님", "icon": "store_owner" },
+      { "id": "delivery_man", "name": "배송기사", "icon": "delivery" },
+      { "id": "regular_customer", "name": "단골손님", "icon": "customer" }
+    ],
+    "answer": "parttimer"
+  },
+  {
+    "id": "level1_scenario4",
+    "title": "반려동물 카페 강아지 간식 사라진 사건",
+    "background": "animal",
+    "story": "반려동물 카페의 수제 간식 한 봉지가 통째로 사라졌다. 간식은 근무자만 열 수 있는 냉장 진열대에 있었고, 그 시간 주방에 혼자 머문 직원이 있었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "첫 번째 열쇠",
+        "text": "카페 사장님은 그 시각 카운터에서 계속 응대 중이었다."
+      },
+      {
+        "id": "key2",
+        "label": "두 번째 열쇠",
+        "text": "손님은 주방 쪽에 들어갈 수 없었다."
+      },
+      {
+        "id": "key3",
+        "label": "세 번째 열쇠",
+        "text": "카페 직원 B가 진열대 앞에서 봉지를 옮기는 모습이 CCTV에 찍혔다."
+      }
+    ],
+    "suspects": [
+      { "id": "staff_a", "name": "카페 직원 A", "icon": "staff_a" },
+      { "id": "staff_b", "name": "카페 직원 B", "icon": "staff_b" },
+      { "id": "cafe_owner", "name": "카페 사장님", "icon": "cafe_owner" },
+      { "id": "guest", "name": "손님 중 한 명", "icon": "guest" }
+    ],
+    "answer": "staff_b"
+  },
+  {
+    "id": "level1_scenario5",
+    "title": "동네 마을 축제 경품 추첨함 바꿔치기 사건",
+    "background": "festival",
+    "story": "마을 축제 경품 추첨을 앞두고 응모권이 다른 함으로 바뀌어 있었다. 추첨함은 완장을 찬 스태프만 들어갈 수 있는 천막 안에 있었고, 추첨 직전 그 안에 혼자 머문 사람이 있었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "왼쪽 열쇠",
+        "text": "마을 이장님과 사회자는 계속 무대 위에 있었다."
+      },
+      {
+        "id": "key2",
+        "label": "가운데 열쇠",
+        "text": "참가 주민은 완장이 없어 천막에 들어갈 수 없었다."
+      },
+      {
+        "id": "key3",
+        "label": "오른쪽 열쇠",
+        "text": "축제 운영 스태프가 추첨 직전 천막 안에 혼자 머문 기록이 확인됐다."
+      }
+    ],
+    "suspects": [
+      { "id": "staff", "name": "운영 스태프", "icon": "staff" },
+      { "id": "village_head", "name": "마을 이장님", "icon": "village_head" },
+      { "id": "resident", "name": "참가 주민", "icon": "resident" },
+      { "id": "host", "name": "사회자", "icon": "host" }
+    ],
+    "answer": "staff"
+  }
 ]
