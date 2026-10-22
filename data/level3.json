@@ -1,0 +1,93 @@
+[
+    {
+    "id": "level3_scenario1",
+    "title": "크루즈 선원 실종 사건",
+    "background": "Cruise",
+    "story": "심야 항해 중 승객 한 명이 사라졌고, 다음 날 선내 창고에서 숨진 채 발견됐다. 배는 폐쇄된 공간이라 범인은 반드시 배 안에 있다.",
+    "clues": [
+    {
+      "id": "key1",
+      "label": "TODO",
+      "text": "피해자는 마지막으로 선내 바에서 목격됐다."
+    },
+    {
+      "id": "key2",
+      "label": "TODO",
+      "text": "사건 시간 갑판 출입 기록에는 기관실 직원과 바텐더만 있었고, 기관실 직원은 같은 시간 점검 중이던 모습이 CCTV에 찍혔다."
+    },
+    {
+      "id": "key3",
+      "label": "TODO",
+      "text": "혈액에서 수면제가 검출됐고 마지막 음료는 칵테일이었는데, 바텐더 작업대에서 동일한 칵테일 잔이 발견됐다."
+    }
+  ],
+    "suspects": [
+      { "id": "Cruise1", "name": "선장", "icon": "Cruise1" },
+      { "id": "Cruise2", "name": "셰프", "icon": "Cruise2" },
+      { "id": "Cruise3", "name": "바텐더", "icon": "Cruise3" },
+      { "id": "Cruise4", "name": "기관실 직원", "icon": "Cruise4" }
+    ],
+    "answer": "Cruise3"
+    },
+    {
+    "id": "level3_scenario2",
+    "title": "미술관 그림 도난 사건",
+    "background": "art_gallery",
+    "story": "간 경비 중이던 미술관에서 고가의 그림이 사라졌다. 경보가 울리지 않은 걸 보면 정식으로 경보를 해제할 권한을 가진 사람의 소행이다.",
+    "clues": [
+    {
+      "id": "key1",
+      "label": "TODO",
+      "text": "큐레이터는 그 시각 출입 기록이 없었고, 청소 용역 직원은 경보 해제 권한이 없다."
+    },
+    {
+      "id": "key2",
+      "label": "TODO",
+      "text": "보안업체 관리자는 원격으로만 접근 가능해 현장에 없었다."
+    },
+    {
+      "id": "key3",
+      "label": "TODO",
+      "text": "경보 해제 기록이 야간 경비원의 출입 카드와 일치했고, 빈 액자 뒤에서 경비원 장갑 섬유가 발견됐다."
+    }
+  ],
+  "suspects": [
+    { "id": "art_gallery1", "name": "큐레이터", "icon": "art_gallery1" },
+    { "id": "art_gallery2", "name": "청소 용역 직원", "icon": "art_gallery2" },
+    { "id": "art_gallery3", "name": "보안업체 관리자", "icon": "art_gallery3" },
+    { "id": "art_gallery4", "name": "야간 경비원", "icon": "art_gallery4" }
+  ],
+  "answer": "art_gallery4"
+},
+{
+  "id": "level3_scenario3",
+  "title": "아파트 엘리베이터 CCTV 파손 사건",
+  "background": "D",
+  "story": "아파트 엘리베이터 CCTV가 고의로 파손됐다. 파손 직후 한 입주민이 갑자기 이사를 서두르기 시작했다는 이야기가 돌았다.",
+  "clues": [
+    {
+      "id": "key1",
+      "label": "TODO",
+      "text": "관리사무소 직원은 파손 시각 관제실에 있었고, 전기 기사는 다른 동에서 작업 중이었다."
+    },
+    {
+      "id": "key2",
+      "label": "TODO",
+      "text": "이사업체 직원은 파손 다음 날 처음 방문했다."
+    },
+    {
+      "id": "key3",
+      "label": "TODO",
+      "text": "파손 직후 입주민이 이사 일정을 앞당긴 사실이 확인됐고, CCTV 사각지대로 이동하는 인물의 옷차림이 그 입주민과 일치했다."
+    }
+  ],
+  "suspects": [
+    { "id": "office_staff", "name": "관리사무소 직원", "icon": "TODO" },
+    { "id": "electrician", "name": "전기 기사", "icon": "TODO" },
+    { "id": "resident", "name": "해당 라인 입주민", "icon": "TODO" },
+    { "id": "moving_staff", "name": "이사업체 직원", "icon": "TODO" }
+  ],
+  "answer": "resident",
+  "explanation": "파손 직후 이사 일정을 앞당긴 사실이 확인됐고, CCTV 사각지대로 이동하는 인물의 옷차림이 해당 라인 입주민과 일치했다."
+}
+]

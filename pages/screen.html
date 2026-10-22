@@ -14,7 +14,7 @@
             <img id="bg-image" src="../assets/image/radio.png" alt="배경">
             <div class="top-bar">
                 <h1 id="story-title"></h1>
-                <div class="timer"><span id="story-time"></span></div>
+                <div class="timer"><span id="story-time">00:00</span></div>
             </div>
 
             <div id="clue-markers"></div>
@@ -25,11 +25,12 @@
         </div>
     </section>
 
+    <!-- 2단계: 범인 선택 화면 -->
     <section id="scene-suspects" class="scene">
         <button id="back-btn" class="back-link" aria-label="이전 화면으로">&larr;</button>
         <div class="top-bar center">
             <h1>범인 선택</h1>
-            <div class="timer"><span id="suspect-time"></span></div>
+            <div class="timer"><span id="suspect-time">00:00</span></div>
         </div>
 
         <div id="suspect-grid" class="suspect-grid"></div>
@@ -37,6 +38,7 @@
         <button id="check-btn" class="check-btn">정답 확인</button>
     </section>
 
+    <!-- 팝업 모달 영역 -->
     <div id="clue-popup" class="popup hidden">
         <div class="popup-box">
             <p id="clue-text"></p>

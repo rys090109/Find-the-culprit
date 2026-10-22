@@ -2,7 +2,6 @@ const IMAGE_DIR = "../assets/image/";
 const DEFAULT_IMAGE = IMAGE_DIR + "file.png";
 
 // ---------- 배경 이미지 매핑 ----------
-// 키는 소문자, 값은 assets/image 안의 "실제 파일명" (대소문자 정확히)
 const BACKGROUND_MAP = {
     radio: "radio.png",
     apartment: "apartment.png",
@@ -25,7 +24,6 @@ const KEY_ICON_MAP = {
 };
 
 // ---------- 용의자 아이콘 매핑 ----------
-// 키: JSON의 suspects[].id 또는 suspects[].icon 값 (소문자로 적기)
 const SUSPECT_ICON_MAP = {
     // level1 suspects[].id
     broadcast_member: "mike.png",
@@ -92,41 +90,31 @@ const SUSPECT_ICON_MAP = {
     resident: "mike.png",
     host: "teacher.png",
 
-    // 공방 사건 (JSON icon 값 → 실제 파일)
+    // 사건별 별칭
     workshop_t: "Workshop1.png",
     studenta: "Workshop2.png",
     studentb: "Workshop3.png",
     workshop_ceo: "Workshop4.png",
-
-    // 티켓 위조 사건
     ticket_designer: "Ticket1.png",
     theater_manager: "Ticket2.png",
     employee: "Ticket3.png",
     theater_actor: "Ticket4.png",
-    // 주의: 위의 staff(기존 사건)와 키가 겹치므로 티켓 사건 JSON의 icon 값은 "Ticket5"로 쓰는 걸 추천
     ticket5: "Ticket5.png",
-
-    // 요가 매트 사건
     yoga1: "Yoga1.png",
     yoga2: "Yoga2.png",
     yoga3: "Yoga3.png",
     yoga4: "Yoga4.png",
-
-    // 플리마켓 사건
     flea_market1: "Flea_Market1.png",
     flea_market2: "Flea_Market2.png",
     flea_market3: "Flea_Market3.png",
     flea_market4: "Flea_Market4.png",
-
-    // 시험지 유출 사건
     test1: "test1.png",
     test2: "test2.png",
     test3: "test3.png",
     test4: "test4.png"
 };
 
-// ---------- 열쇠 위치 (JSON에 clue.position이 없을 때 쓰는 기본값) ----------
-// 배경 이미지 기준 % 좌표. JSON에 position을 직접 넣으면 그쪽이 우선됨.
+// ---------- 열쇠 위치 ----------
 const CLUE_POSITION_MAP = {
     workshop: {
         key1: { top: "39%", left: "15%" },
@@ -157,6 +145,8 @@ const CLUE_POSITION_MAP = {
 
 let currentLevel = null;
 let selectedSuspectId = null;
+let timerInterval = null;
+let isGameCleared = false;
 
 // ---------- 경로 헬퍼 ----------
 function getBackgroundPath(bgKey) {
@@ -182,14 +172,40 @@ function getCluePosition(clue, bgKey) {
     return { top: "50%", left: "50%" };
 }
 
-// 이미지가 깨지면 기본 이미지로 교체
 function setImageWithFallback(imgEl, path) {
     imgEl.onerror = () => {
         console.warn(`이미지를 찾을 수 없음: ${path}`);
-        imgEl.onerror = null; // 무한 반복 방지
+        imgEl.onerror = null;
         imgEl.src = DEFAULT_IMAGE;
     };
     imgEl.src = path;
+}
+
+// ---------- 실시간 타이머 기능 ----------
+function startTimer() {
+    let startTime = sessionStorage.getItem("startTime");
+
+    if (!startTime) {
+        startTime = Date.now();
+        sessionStorage.setItem("startTime", startTime);
+    }
+
+    if (timerInterval) clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        const elapsedTime = Math.floor((Date.now() - Number(startTime)) / 1000);
+
+        const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, "0");
+        const seconds = String(elapsedTime % 60).padStart(2, "0");
+        const timeString = `${minutes}:${seconds}`;
+
+        // 1단계(story-time)와 2단계(suspect-time) 두 텍스트 영역 모두 업데이트
+        const storyTimer = document.getElementById("story-time");
+        const suspectTimer = document.getElementById("suspect-time");
+
+        if (storyTimer) storyTimer.innerText = timeString;
+        if (suspectTimer) suspectTimer.innerText = timeString;
+    }, 1000);
 }
 
 // ---------- URL에서 level, title 읽기 ----------
@@ -239,7 +255,6 @@ function renderClueMarkers(clues, bgKey) {
     container.innerHTML = "";
 
     clues.forEach((clue) => {
-        // 열쇠 아이콘이 없는 clue(예: key4)는 화면에 표시할 수 없으므로 건너뜀
         if (!KEY_ICON_MAP[clue.id]) {
             console.warn(`열쇠 아이콘이 없는 clue 건너뜀: ${clue.id}`);
             return;
@@ -316,6 +331,16 @@ function checkAnswer(level) {
     const isCorrect = selectedSuspectId === level.answer;
 
     if (isCorrect) {
+        // 타이머 중지 및 소요 시간 저장
+        clearInterval(timerInterval);
+
+        const startTime = sessionStorage.getItem("startTime");
+        const totalSeconds = startTime ? Math.floor((Date.now() - Number(startTime)) / 1000) : 0;
+        sessionStorage.setItem("clearTime", totalSeconds);
+        sessionStorage.removeItem("startTime");
+
+        isGameCleared = true;
+
         let message = "정답입니다! 사건을 해결했습니다.";
         if (level.explanation) message += `\n\n${level.explanation}`;
         showResultPopup(message);
@@ -327,12 +352,16 @@ function checkAnswer(level) {
 function showResultPopup(text) {
     const el = document.getElementById("result-text");
     el.textContent = text;
-    el.style.whiteSpace = "pre-line"; // 줄바꿈(\n) 표시
+    el.style.whiteSpace = "pre-line";
     document.getElementById("result-popup").classList.remove("hidden");
 }
 
 function closeResultPopup() {
     document.getElementById("result-popup").classList.add("hidden");
+
+    if (isGameCleared) {
+        window.location.href = "../pages/result.html";
+    }
 }
 
 // ---------- 화면 전환 ----------
@@ -353,6 +382,9 @@ async function init() {
 
     currentLevel = levelData;
     renderStoryScene(levelData);
+
+    // 실시간 타이머 시작
+    startTimer();
 
     document.getElementById("next-btn").addEventListener("click", () => {
         renderSuspectScene(currentLevel);

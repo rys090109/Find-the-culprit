@@ -144,6 +144,9 @@ async function playRevealAnimation(dataList, chosenScenario, level) {
 
     await wait(1100);
 
+    // 룰렛 연출이 끝나고 게임 화면으로 넘어가기 바로 전, 추리 시작 시각 기록
+    sessionStorage.setItem("startTime", Date.now());
+
     window.location.href = `../pages/screen.html?level=${level}&title=${encodeURIComponent(chosenScenario.title)}`;
 }
 
