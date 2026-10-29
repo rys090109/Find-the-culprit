@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>레벨별 랭킹</title>
+    <link rel="stylesheet" href="../css/rank.css" />
+  </head>
+
+  <body>
+    <main class="ranking-container">
+      <p class="ranking-label">DETECTIVE RANKING</p>
+      <h1>명탐정 랭킹</h1>
+      <p class="ranking-description">레벨별 최고 점수를 확인해보세요.</p>
+
+      <div class="level-buttons">
+        <button class="level-btn" data-level="1">LEVEL 1</button>
+        <button class="level-btn" data-level="2">LEVEL 2</button>
+        <button class="level-btn" data-level="3">LEVEL 3</button>
+        <button class="level-btn" data-level="4">LEVEL 4</button>
+        <button class="level-btn" data-level="5">LEVEL 5</button>
+      </div>
+
+      <section class="ranking-board">
+        <div class="ranking-header">
+          <span>순위</span>
+          <span>닉네임</span>
+          <span>점수</span>
+          <span>정답률</span>
+          <span>단서</span>
+        </div>
+
+        <div id="ranking-list" class="ranking-list">
+          <p class="status-message">랭킹을 불러오고 있습니다.</p>
+        </div>
+      </section>
+
+      <button id="back-btn" class="back-btn">돌아가기</button>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabaseClient.js"></script>
+    <script src="../js/rankingService.js"></script>
+    <script src="../js/rank.js"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background: #020d23;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.ranking-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 8vw;
+  background: #020d23;
+  text-align: center;
+}
+
+.ranking-label {
+  margin: 0 0 10px;
+  color: #8294b5;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin: 0;
+  color: #f1bd3e;
+  font-size: 38px;
+}
+
+.ranking-description {
+  margin: 14px 0 30px;
+  color: #c4cee0;
+}
+
+.level-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.level-btn {
+  padding: 11px 20px;
+  border: 1px solid #4b5d79;
+  border-radius: 8px;
+  background: #233147;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.level-btn:hover,
+.level-btn.active {
+  border-color: #f1bd3e;
+  background: #f1bd3e;
+  color: #091225;
+}
+
+.ranking-board {
+  overflow: hidden;
+  border: 1px solid #3b4d68;
+  border-radius: 12px;
+  background: #111d31;
+}
+
+.ranking-header,
+.ranking-item {
+  display: grid;
+  grid-template-columns: 90px 1.5fr 1fr 1fr 1fr;
+  align-items: center;
+  min-height: 65px;
+  padding: 0 20px;
+}
+
+.ranking-header {
+  background: #25344c;
+  color: #aebbd0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ranking-item {
+  border-top: 1px solid #2b3a51;
+  color: #e9eef7;
+}
+
+.ranking-item.current-user {
+  background: rgba(241, 189, 62, 0.12);
+  border: 1px solid #f1bd3e;
+}
+
+.rank-number {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.rank-1 .rank-number {
+  color: #ffd54a;
+}
+
+.rank-2 .rank-number {
+  color: #d5dbe5;
+}
+
+.rank-3 .rank-number {
+  color: #d18b54;
+}
+
+.nickname {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.score {
+  color: #f1bd3e;
+  font-weight: 700;
+}
+
+.status-message {
+  margin: 0;
+  padding: 55px 20px;
+  color: #aebbd0;
+}
+
+.back-btn {
+  width: 230px;
+  height: 58px;
+  margin-top: 150px;
+  border: none;
+  border-radius: 10px;
+  background: #f1bd3e;
+  color: #091225;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  filter: brightness(1.05);
+}
+
+@media (max-width: 700px) {
+  .ranking-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 35px 15px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .ranking-board {
+    overflow-x: auto;
+  }
+
+  .ranking-header,
+  .ranking-item {
+    min-width: 650px;
+  }
+}

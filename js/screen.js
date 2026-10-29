@@ -157,8 +157,18 @@ const CLUE_POSITION_MAP = {
 };
 
 let currentLevel = null;
+let levelDataList = [];
+let currentScenarioIndex = 0;
+
 let selectedSuspectId = null;
 let bgmAudio = null;
+
+let correctCount = 0;
+let totalAttempts = 0;
+let totalClueCount = 0;
+let openedClueIds = new Set();
+
+let shouldMoveNext = false;
 
 // ---------- 경로 헬퍼 ----------
 function getBackgroundPath(bgKey) {
@@ -203,23 +213,39 @@ function getQueryParams() {
   };
 }
 
-// ---------- 데이터 불러오기 ----------
-async function loadLevelByTitle(targetTitle, level) {
+// ---------- 해당 레벨의 모든 사건 불러오기 ----------
+async function loadLevelScenarios(targetTitle, level) {
   try {
     const res = await fetch(`../data/level${level}.json`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
 
     const dataList = await res.json();
-    const found = dataList.find((item) => item.title === targetTitle);
 
-    if (!found) {
-      console.log("해당 제목의 사건을 찾을 수 없습니다.");
-      return null;
+    if (!Array.isArray(dataList) || dataList.length === 0) {
+      return [];
     }
-    return found;
-  } catch (err) {
-    console.error("사건 데이터를 불러오지 못했습니다:", err);
-    return null;
+
+    // 룰렛에서 선택된 사건을 첫 번째 문제로 배치
+    const selectedScenario = dataList.find(
+      (item) => item.title === targetTitle,
+    );
+
+    // 나머지 사건은 무작위 순서로 섞기
+    const otherScenarios = dataList
+      .filter((item) => item.title !== targetTitle)
+      .sort(() => Math.random() - 0.5);
+
+    if (selectedScenario) {
+      return [selectedScenario, ...otherScenarios];
+    }
+
+    return [...dataList].sort(() => Math.random() - 0.5);
+  } catch (error) {
+    console.error("사건 데이터를 불러오지 못했습니다:", error);
+    return [];
   }
 }
 
@@ -260,7 +286,16 @@ function renderClueMarkers(clues, bgKey) {
     img.alt = clue.label;
 
     btn.appendChild(img);
-    btn.addEventListener("click", () => showCluePopup(clue.text));
+
+    btn.addEventListener("click", () => {
+      // 같은 사건에서 동일한 단서를 여러 번 눌러도 한 번만 계산
+      if (!openedClueIds.has(clue.id)) {
+        openedClueIds.add(clue.id);
+        totalClueCount += 1;
+      }
+
+      showCluePopup(clue.text);
+    });
 
     container.appendChild(btn);
   });
@@ -311,30 +346,105 @@ function renderSuspectScene(level) {
 
 function checkAnswer(level) {
   if (!selectedSuspectId) {
-    showResultPopup("범인을 먼저 선택해주세요.");
+    shouldMoveNext = false;
+    showResultPopup("범인을 먼저 선택해주세요.", "확인");
     return;
   }
+
+  // 정답 확인 버튼을 누를 때마다 시도 횟수 증가
+  totalAttempts += 1;
 
   const isCorrect = selectedSuspectId === level.answer;
 
   if (isCorrect) {
+    correctCount += 1;
+    shouldMoveNext = true;
+
     let message = "정답입니다! 사건을 해결했습니다.";
-    if (level.explanation) message += `\n\n${level.explanation}`;
-    showResultPopup(message);
+
+    if (level.explanation) {
+      message += `\n\n${level.explanation}`;
+    }
+
+    const isLastScenario = currentScenarioIndex === levelDataList.length - 1;
+
+    showResultPopup(message, isLastScenario ? "결과 보기" : "다음 사건");
   } else {
-    showResultPopup("오답입니다. 다시 추리해보세요.");
+    shouldMoveNext = false;
+    showResultPopup(
+      "오답입니다. 단서를 다시 확인하고 추리해보세요.",
+      "다시 추리하기",
+    );
   }
 }
 
-function showResultPopup(text) {
-  const el = document.getElementById("result-text");
-  el.textContent = text;
-  el.style.whiteSpace = "pre-line"; // 줄바꿈(\n) 표시
+function showResultPopup(text, buttonText = "확인") {
+  const resultText = document.getElementById("result-text");
+  const resultClose = document.getElementById("result-close");
+
+  resultText.textContent = text;
+  resultText.style.whiteSpace = "pre-line";
+  resultClose.textContent = buttonText;
+
   document.getElementById("result-popup").classList.remove("hidden");
 }
-
 function closeResultPopup() {
   document.getElementById("result-popup").classList.add("hidden");
+
+  if (!shouldMoveNext) {
+    return;
+  }
+
+  shouldMoveNext = false;
+  moveToNextScenario();
+}
+// ---------- 현재 사건 표시 ----------
+function showCurrentScenario() {
+  currentLevel = levelDataList[currentScenarioIndex];
+  selectedSuspectId = null;
+  openedClueIds = new Set();
+
+  renderStoryScene(currentLevel);
+
+  document
+    .querySelectorAll(".suspect-item")
+    .forEach((item) => item.classList.remove("selected"));
+}
+
+// ---------- 다음 사건으로 이동 ----------
+function moveToNextScenario() {
+  const isLastScenario = currentScenarioIndex >= levelDataList.length - 1;
+
+  if (isLastScenario) {
+    finishLevel();
+    return;
+  }
+
+  currentScenarioIndex += 1;
+  showCurrentScenario();
+
+  switchScene("scene-suspects", "scene-story");
+}
+
+// ---------- 레벨 완료 ----------
+function finishLevel() {
+  const { level } = getQueryParams();
+
+  const gameResult = {
+    level: Number(level),
+    correctCount,
+    totalCount: totalAttempts,
+    clueCount: totalClueCount,
+    caseCount: levelDataList.length,
+  };
+
+  localStorage.setItem("gameResult", JSON.stringify(gameResult));
+
+  if (bgmAudio) {
+    bgmAudio.pause();
+  }
+
+  location.href = "./result.html";
 }
 
 // ---------- 화면 전환 ----------
@@ -404,15 +514,20 @@ async function init() {
   const { level, title } = getQueryParams();
 
   initBgm(level);
-  const levelData = await loadLevelByTitle(title, level);
 
-  if (!levelData) {
-    console.log("사건 데이터를 불러오지 못했습니다.");
+  levelDataList = await loadLevelScenarios(title, level);
+
+  if (levelDataList.length === 0) {
+    alert("사건 데이터를 불러오지 못했습니다.");
     return;
   }
 
-  currentLevel = levelData;
-  renderStoryScene(levelData);
+  currentScenarioIndex = 0;
+  correctCount = 0;
+  totalAttempts = 0;
+  totalClueCount = 0;
+
+  showCurrentScenario();
 
   document.getElementById("next-btn").addEventListener("click", () => {
     renderSuspectScene(currentLevel);
@@ -430,6 +545,49 @@ async function init() {
   document
     .getElementById("clue-close")
     .addEventListener("click", closeCluePopup);
+
+  document
+    .getElementById("result-close")
+    .addEventListener("click", closeResultPopup);
+}
+
+init();
+async function init() {
+  const { level, title } = getQueryParams();
+
+  initBgm(level);
+
+  levelDataList = await loadLevelScenarios(title, level);
+
+  if (levelDataList.length === 0) {
+    alert("사건 데이터를 불러오지 못했습니다.");
+    return;
+  }
+
+  currentScenarioIndex = 0;
+  correctCount = 0;
+  totalAttempts = 0;
+  totalClueCount = 0;
+
+  showCurrentScenario();
+
+  document.getElementById("next-btn").addEventListener("click", () => {
+    renderSuspectScene(currentLevel);
+    switchScene("scene-story", "scene-suspects");
+  });
+
+  document.getElementById("back-btn").addEventListener("click", () => {
+    switchScene("scene-suspects", "scene-story");
+  });
+
+  document.getElementById("check-btn").addEventListener("click", () => {
+    checkAnswer(currentLevel);
+  });
+
+  document
+    .getElementById("clue-close")
+    .addEventListener("click", closeCluePopup);
+
   document
     .getElementById("result-close")
     .addEventListener("click", closeResultPopup);

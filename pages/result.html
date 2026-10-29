@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>탐정 유형 결과</title>
+    <link rel="stylesheet" href="../css/result.css" />
+  </head>
+  <body>
+    <main class="result-container">
+      <p class="result-label">DETECTIVE TYPE</p>
+
+      <img
+        class="detective-image"
+        src="../assets/image/detective.png"
+        alt="탐정 유형 이미지"
+      />
+
+      <p id="type-english" class="type-english">DETECTIVE TYPE</p>
+      <h1 id="detective-type">결과 분석 중</h1>
+      <p id="type-description" class="type-description"></p>
+
+      <div class="result-stats">
+        <div class="stat-card">
+          <strong id="average-clues">0개</strong>
+          <span>평균 단서 사용</span>
+        </div>
+
+        <div class="stat-card">
+          <strong id="accuracy">0%</strong>
+          <span>정답률</span>
+        </div>
+
+        <div class="stat-card">
+          <strong id="final-score">0점</strong>
+          <span>최종 점수</span>
+        </div>
+      </div>
+
+      <p id="save-message" class="save-message">결과를 저장하고 있습니다.</p>
+
+      <div class="result-buttons">
+        <button id="confirm-btn" class="primary-btn">확인</button>
+        <button id="ranking-btn" class="secondary-btn">랭킹 보기</button>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabaseClient.js"></script>
+    <script src="../js/rankingService.js"></script>
+    <script src="../js/result.js"></script>
+  </body>
+</html>
