@@ -17,11 +17,11 @@ function createRankingItem(ranking, currentUserId) {
   rank.className = "rank-number";
 
   if (ranking.rank === 1) {
-    rank.textContent = "🥇";
+    rank.textContent = "\u{1F947}";
   } else if (ranking.rank === 2) {
-    rank.textContent = "🥈";
+    rank.textContent = "\u{1F948}";
   } else if (ranking.rank === 3) {
-    rank.textContent = "🥉";
+    rank.textContent = "\u{1F949}";
   } else {
     rank.textContent = ranking.rank;
   }

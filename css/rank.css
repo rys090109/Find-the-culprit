@@ -64,6 +64,8 @@ h1 {
 }
 
 .ranking-board {
+  width: 70%;
+  margin: 0 auto;
   overflow: hidden;
   border: 1px solid #3b4d68;
   border-radius: 12px;
