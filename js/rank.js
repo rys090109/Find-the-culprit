@@ -1,3 +1,16 @@
+function formatClearTime(totalSeconds) {
+  const secondsValue = Number(totalSeconds);
+
+  // 시간 데이터가 없는 기존 기록
+  if (!secondsValue || secondsValue <= 0) {
+    return "-";
+  }
+
+  const minutes = String(Math.floor(secondsValue / 60)).padStart(2, "0");
+  const seconds = String(secondsValue % 60).padStart(2, "0");
+
+  return `${minutes}:${seconds}`;
+}
 const rankingList = document.getElementById("ranking-list");
 const levelButtons = document.querySelectorAll(".level-btn");
 
@@ -40,7 +53,11 @@ function createRankingItem(ranking, currentUserId) {
   const clueCount = document.createElement("span");
   clueCount.textContent = `${Number(ranking.clue_count)}개`;
 
-  item.append(rank, nickname, score, accuracy, clueCount);
+  const clearTime = document.createElement("span");
+  clearTime.className = "clear-time";
+  clearTime.textContent = formatClearTime(ranking.clear_time);
+
+  item.append(rank, nickname, score, accuracy, clueCount, clearTime);
 
   return item;
 }

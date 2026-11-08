@@ -75,7 +75,7 @@ h1 {
 .ranking-header,
 .ranking-item {
   display: grid;
-  grid-template-columns: 90px 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 80px 1.3fr 1fr 1fr 0.8fr 1fr;
   align-items: center;
   min-height: 65px;
   padding: 0 20px;
@@ -120,6 +120,10 @@ h1 {
   font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.clear-time {
+  color: #c4cee0;
+  font-weight: 600;
 }
 
 .score {
