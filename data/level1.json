@@ -55,10 +55,10 @@
     }
   ],
   "suspects": [
-    { "id": "bike_neighbor", "name": "자전거 동호회 이웃", "icon": "person_silhouette" },
-    { "id": "janitor", "name": "미화원", "icon": "broomstick" },
-    { "id": "guard", "name": "경비원", "icon": "guard" },
-    { "id": "neighbor", "name": "옆 동 주민", "icon": "couple" }
+    { "id": "bike_neighbor", "name": "자전거 동호회 이웃", "icon": "apartment1" },
+    { "id": "janitor", "name": "미화원", "icon": "apartment2" },
+    { "id": "guard", "name": "경비원", "icon": "apartment3" },
+    { "id": "neighbor", "name": "옆 동 주민", "icon": "apartment4" }
   ],
   "answer": "bike_neighbor"
 },
@@ -85,10 +85,10 @@
     }
   ],
   "suspects": [
-    { "id": "parttimer", "name": "아르바이트생", "icon": "parttimer" },
-    { "id": "store_owner", "name": "편의점 사장님", "icon": "store_owner" },
-    { "id": "delivery_man", "name": "배송기사", "icon": "delivery" },
-    { "id": "regular_customer", "name": "단골손님", "icon": "customer" }
+    { "id": "parttimer", "name": "아르바이트생", "icon": "icecream1" },
+    { "id": "store_owner", "name": "편의점 사장님", "icon": "icecream2" },
+    { "id": "delivery_man", "name": "배송기사", "icon": "icecream3" },
+    { "id": "regular_customer", "name": "단골손님", "icon": "icecream4" }
   ],
   "answer": "parttimer"
 },
@@ -118,10 +118,10 @@
       }
     ],
     "suspects": [
-      { "id": "staff_a", "name": "카페 직원 A", "icon": "staff_a" },
-      { "id": "staff_b", "name": "카페 직원 B", "icon": "staff_b" },
-      { "id": "cafe_owner", "name": "카페 사장님", "icon": "cafe_owner" },
-      { "id": "guest", "name": "손님 중 한 명", "icon": "guest" }
+      { "id": "staff_a", "name": "카페 직원 A", "icon": "animal1" },
+      { "id": "staff_b", "name": "카페 직원 B", "icon": "animal2" },
+      { "id": "cafe_owner", "name": "카페 사장님", "icon": "animal3" },
+      { "id": "guest", "name": "손님 중 한 명", "icon": "animal4" }
     ],
     "answer": "staff_b"
   },
@@ -151,10 +151,10 @@
       }
     ],
     "suspects": [
-      { "id": "staff", "name": "운영 스태프", "icon": "staff" },
-      { "id": "village_head", "name": "마을 이장님", "icon": "village_head" },
-      { "id": "resident", "name": "참가 주민", "icon": "resident" },
-      { "id": "host", "name": "사회자", "icon": "host" }
+      { "id": "staff", "name": "운영 스태프", "icon": "festivities1" },
+      { "id": "village_head", "name": "마을 이장님", "icon": "festivities2" },
+      { "id": "resident", "name": "참가 주민", "icon": "festivities3" },
+      { "id": "host", "name": "사회자", "icon": "festivities4" }
     ],
     "answer": "staff"
   }

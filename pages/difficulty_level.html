@@ -12,40 +12,39 @@
     <h1 id="head">난이도를 선택하세요</h1>
 
     <div class="difficulty-grid">
-        <button class="difficulty-item" data-level="1">
+        <button type="button" class="difficulty-item" data-level="1">
             <img src="../assets/image/file.png" alt="난이도 1">
             <img class="stars" src="../assets/image/difficulty_level_1.png" alt="별 1개">
         </button>
-        <button class="difficulty-item" data-level="2">
+        <button type="button" class="difficulty-item" data-level="2">
             <img src="../assets/image/file.png" alt="난이도 2">
             <img class="stars" src="../assets/image/difficulty_level_2.png" alt="별 2개">
         </button>
-        <button class="difficulty-item" data-level="3">
+        <button type="button" class="difficulty-item" data-level="3">
             <img src="../assets/image/file.png" alt="난이도 3">
             <img class="stars" src="../assets/image/difficulty_level_3.png" alt="별 3개">
         </button>
-        <button class="difficulty-item" data-level="4">
+        <button type="button" class="difficulty-item" data-level="4">
             <img src="../assets/image/file.png" alt="난이도 4">
             <img class="stars" src="../assets/image/difficulty_level_4.png" alt="별 4개">
         </button>
-        <button class="difficulty-item" data-level="5">
+        <button type="button" class="difficulty-item" data-level="5">
             <img src="../assets/image/file.png" alt="난이도 5">
             <img class="stars" src="../assets/image/difficulty_level_5.png" alt="별 5개">
         </button>
     </div>
 
-    <button class="open-file-btn">사건 파일 열기</button>
+    <button type="button" class="open-file-btn">사건 파일 열기</button>
 
-   <!-- 파일 셔플 개봉 오버레이 -->
-<!-- 룰렛 개봉 오버레이 -->
-<div id="reveal-overlay" class="reveal-overlay hidden">
-    <div class="roulette-viewport">
-        <div class="roulette-track" id="roulette-track"></div>
-        <div class="roulette-marker"></div>
+    <!-- 룰렛 개봉 오버레이 -->
+    <div id="reveal-overlay" class="reveal-overlay hidden">
+        <div class="roulette-viewport">
+            <div class="roulette-track" id="roulette-track"></div>
+            <div class="roulette-marker"></div>
+        </div>
+        <p class="reveal-label" id="reveal-label" aria-live="polite">사건을 조회하는 중</p>
+        <div class="reveal-underline"></div>
     </div>
-    <p class="reveal-label" id="reveal-label">사건을 조회하는 중</p>
-    <div class="reveal-underline"></div>
-</div>
     <script src="../js/difficulty_level.js"></script>
 </body>
 </html>

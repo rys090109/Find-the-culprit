@@ -8,20 +8,15 @@ const BACKGROUND_MAP = {
   apartment: "apartment.png",
   icecream: "icecream.png",
   animal: "animal.png",
+  festivities: "festivities.png",
   festival: "festivities.png",
+  d: "elevator.png",
 
   workshop: "Workshop.png",
   ticket: "Ticket.png",
   yoga: "Yoga.png",
   flea_market: "Flea_Market.png",
   test: "test.png",
-};
-
-// ---------- 열쇠 아이콘 (공통 이미지 3종 재사용) ----------
-const KEY_ICON_MAP = {
-  key1: IMAGE_DIR + "key1.png",
-  key2: IMAGE_DIR + "key2.png",
-  key3: IMAGE_DIR + "key3.png",
 };
 
 // ---------- 용의자 아이콘 매핑 ----------
@@ -76,83 +71,30 @@ const SUSPECT_ICON_MAP = {
   laptop: "Laptop.png",
   broomstick: "broomstick.png",
   person_silhouette: "mike.png",
-  guard: "teacher.png",
   couple: "teacher.png",
-  parttimer: "mike.png",
-  store_owner: "teacher.png",
+  icecream1: "mike.png",
+  icecream2: "teacher.png",
+  icecream3: "mike.png",
+  icecream4: "teacher.png",
+  apartment1: "mike.png",
+  apartment2: "teacher.png",
+  apartment3: "mike.png",
+  apartment4: "teacher.png",
   delivery: "broomstick.png",
   customer: "mike.png",
-  staff_a: "mike.png",
-  staff_b: "teacher.png",
-  cafe_owner: "teacher.png",
-  guest: "mike.png",
-  staff: "teacher.png",
-  village_head: "teacher.png",
-  resident: "mike.png",
-  host: "teacher.png",
 
-  // 공방 사건 (JSON icon 값 → 실제 파일)
+  // 사건별 별칭
   workshop_t: "Workshop1.png",
   studenta: "Workshop2.png",
   studentb: "Workshop3.png",
   workshop_ceo: "Workshop4.png",
-
-  // 티켓 위조 사건
   ticket_designer: "Ticket1.png",
   theater_manager: "Ticket2.png",
   employee: "Ticket3.png",
   theater_actor: "Ticket4.png",
-  // 주의: 위의 staff(기존 사건)와 키가 겹치므로 티켓 사건 JSON의 icon 값은 "Ticket5"로 쓰는 걸 추천
-  ticket5: "Ticket5.png",
-
-  // 요가 매트 사건
-  yoga1: "Yoga1.png",
-  yoga2: "Yoga2.png",
-  yoga3: "Yoga3.png",
-  yoga4: "Yoga4.png",
-
-  // 플리마켓 사건
-  flea_market1: "Flea_Market1.png",
-  flea_market2: "Flea_Market2.png",
-  flea_market3: "Flea_Market3.png",
-  flea_market4: "Flea_Market4.png",
-
-  // 시험지 유출 사건
-  test1: "test1.png",
-  test2: "test2.png",
-  test3: "test3.png",
-  test4: "test4.png",
 };
 
-// ---------- 열쇠 위치 ----------
-const CLUE_POSITION_MAP = {
-  workshop: {
-    key1: { top: "39%", left: "15%" },
-    key2: { top: "31%", left: "55%" },
-    key3: { top: "51%", left: "78%" },
-  },
-  ticket: {
-    key1: { top: "29%", left: "12%" },
-    key2: { top: "28%", left: "65%" },
-    key3: { top: "52%", left: "80%" },
-  },
-  yoga: {
-    key1: { top: "41%", left: "26%" },
-    key2: { top: "31%", left: "59%" },
-    key3: { top: "54%", left: "77%" },
-  },
-  flea_market: {
-    key1: { top: "41%", left: "26%" },
-    key2: { top: "31%", left: "59%" },
-    key3: { top: "54%", left: "77%" },
-  },
-  test: {
-    key1: { top: "30%", left: "13%" },
-    key2: { top: "29%", left: "65%" },
-    key3: { top: "53%", left: "78%" },
-  },
-};
-
+// ---------- 게임 진행 상태 ----------
 let currentLevel = null;
 let levelDataList = [];
 let currentScenarioIndex = 0;
@@ -172,34 +114,54 @@ let timerInterval = null;
 // ---------- 경로 헬퍼 ----------
 function getBackgroundPath(bgKey) {
   if (!bgKey) return DEFAULT_IMAGE;
-  const mapped = BACKGROUND_MAP[String(bgKey).toLowerCase()];
-  return mapped ? IMAGE_DIR + mapped : `${IMAGE_DIR}${bgKey}.png`;
+  const value = String(bgKey).trim();
+  const mapped = BACKGROUND_MAP[value.toLowerCase()];
+  return mapped ? IMAGE_DIR + mapped : `${IMAGE_DIR}${value}.png`;
 }
 
-function getSuspectIconPath(suspect) {
-  const suspectKey = suspect?.id || suspect?.icon;
-  if (!suspectKey) return IMAGE_DIR + "mike.png";
+// 용의자 이미지 후보를 우선순위대로 만든다. (앞에서부터 시도하고, 파일이 없으면 다음 후보로 넘어감)
+//  1) JSON의 icon 값과 같은 이름의 파일  예) "person_silhouette" -> person_silhouette.png
+//  2) 매핑표에 등록된 파일 (대소문자가 다른 파일명, 임시 대체 이미지용)
+//  3) id와 같은 이름의 파일, 매핑표
+//  4) 마지막으로 기본 이미지
+function getSuspectIconCandidates(suspect) {
+  const icon = suspect?.icon ? String(suspect.icon).trim() : "";
+  const id = suspect?.id ? String(suspect.id).trim() : "";
+  const candidates = [];
 
-  const mapped = SUSPECT_ICON_MAP[String(suspectKey).toLowerCase()];
-  return mapped ? IMAGE_DIR + mapped : IMAGE_DIR + "mike.png";
+  if (icon) {
+    candidates.push(`${IMAGE_DIR}${icon.replace(/\.png$/i, "")}.png`);
+    const mapped = SUSPECT_ICON_MAP[icon.toLowerCase()];
+    if (mapped) candidates.push(IMAGE_DIR + mapped);
+  }
+
+  if (id) {
+    candidates.push(`${IMAGE_DIR}${id.replace(/\.png$/i, "")}.png`);
+    const mapped = SUSPECT_ICON_MAP[id.toLowerCase()];
+    if (mapped) candidates.push(IMAGE_DIR + mapped);
+  }
+
+  candidates.push(IMAGE_DIR + "mike.png");
+
+  return [...new Set(candidates)];
 }
 
-function getCluePosition(clue, bgKey) {
-  if (clue.position) return clue.position;
+// 경로 하나 또는 후보 배열을 받아서, 이미지가 없으면 다음 후보로 넘어감
+function setImageWithFallback(imgEl, paths) {
+  const list = (Array.isArray(paths) ? paths : [paths]).filter(Boolean);
+  let index = 0;
 
-  const bgPositions = CLUE_POSITION_MAP[String(bgKey).toLowerCase()];
-  if (bgPositions && bgPositions[clue.id]) return bgPositions[clue.id];
-
-  return { top: "50%", left: "50%" };
-}
-
-function setImageWithFallback(imgEl, path) {
   imgEl.onerror = () => {
-    console.warn(`이미지를 찾을 수 없음: ${path}`);
-    imgEl.onerror = null; // 무한 반복 방지
-    imgEl.src = DEFAULT_IMAGE;
+    console.warn(`이미지를 찾을 수 없음: ${list[index]}`);
+    index += 1;
+    if (index < list.length) {
+      imgEl.src = list[index];
+    } else {
+      imgEl.onerror = null; // 무한 반복 방지
+      imgEl.src = DEFAULT_IMAGE;
+    }
   };
-  imgEl.src = path;
+  imgEl.src = list[0] || DEFAULT_IMAGE;
 }
 
 // ---------- 실시간 타이머 기능 ----------
@@ -284,60 +246,63 @@ function renderStoryScene(level) {
     getBackgroundPath(level.background),
   );
 
-  renderClueMarkers(level.clues, level.background);
+  renderClueMarkers(level.clues);
 }
 
-// ---------- [추가] 힌트 구역 층을 "화면에 실제로 보이는 이미지"와 똑같은 크기/위치로 맞춤 ----------
-// 배경 이미지는 원래 코드 그대로 object-fit: cover 로 표시하고,
-// 힌트 구역 층만 이미지가 실제로 그려진 영역에 겹쳐 놓음.
-// 그래서 창 크기가 달라져도 이미지가 잘리는 대로 구역이 같이 움직여서 항상 같은 물건 위에 있음.
+// ---------- 힌트 구역 층을 "화면에 실제로 보이는 이미지"와 똑같은 크기/위치로 맞춤 ----------
+// 배경 이미지는 object-fit: cover 로 표시하고, 힌트 구역 층만 이미지가 실제로
+// 그려진 영역에 겹쳐 놓음. 그래서 창 크기가 달라져도 구역이 항상 같은 물건 위에 있음.
 // (position의 % 값은 "화면"이 아니라 "이미지 자체" 기준)
 function layoutClueLayer() {
-    const img = document.getElementById("bg-image");
-    const layer = document.getElementById("clue-markers");
-    if (!img || !layer || !img.naturalWidth) return;
+  const img = document.getElementById("bg-image");
+  const layer = document.getElementById("clue-markers");
+  if (!img || !layer || !img.naturalWidth) return;
 
-    const area = img.parentElement;
-    if (layer.parentElement !== area) area.appendChild(layer);
+  const area = img.parentElement;
+  if (layer.parentElement !== area) area.appendChild(layer);
 
-    const W = area.clientWidth;
-    const H = area.clientHeight;
-    if (!W || !H) return; // 다른 화면이 켜져 있어서 크기를 잴 수 없을 때
+  const W = area.clientWidth;
+  const H = area.clientHeight;
+  if (!W || !H) return; // 다른 화면이 켜져 있어서 크기를 잴 수 없을 때
 
-    const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
-    const w = img.naturalWidth * scale;
-    const h = img.naturalHeight * scale;
+  const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+  const w = img.naturalWidth * scale;
+  const h = img.naturalHeight * scale;
 
-    layer.style.position = "absolute";
-    layer.style.width = w + "px";
-    layer.style.height = h + "px";
-    layer.style.left = (W - w) / 2 + "px";
-    layer.style.top = (H - h) / 2 + "px";
+  layer.style.position = "absolute";
+  layer.style.width = w + "px";
+  layer.style.height = h + "px";
+  layer.style.left = (W - w) / 2 + "px";
+  layer.style.top = (H - h) / 2 + "px";
 }
 
-function renderClueMarkers(clues, bgKey) {
+function renderClueMarkers(clues) {
   const container = document.getElementById("clue-markers");
   container.innerHTML = "";
 
   clues.forEach((clue) => {
-    if (!KEY_ICON_MAP[clue.id]) {
-      console.warn(`열쇠 아이콘이 없는 clue 건너뜀: ${clue.id}`);
-      return;
-    }
-
-    const pos = getCluePosition(clue, bgKey);
+    // JSON 내부 position 사용
+    const pos = clue.position || {
+      top: "50%",
+      left: "50%",
+      width: "80px",
+      height: "80px",
+    };
 
     const btn = document.createElement("button");
     btn.className = "clue-marker";
+
+    // 위치 및 너비/높이 동적 할당
     btn.style.top = pos.top;
     btn.style.left = pos.left;
-    btn.setAttribute("aria-label", clue.label);
+    btn.style.width = pos.width || "80px";
+    btn.style.height = pos.height || "80px";
 
-    const img = document.createElement("img");
-    img.src = KEY_ICON_MAP[clue.id];
-    img.alt = clue.label;
+    // 물건 모양대로 구역을 깎고 싶을 때: position에 "shape": "polygon(...)" 추가
+    if (pos.shape) btn.style.clipPath = pos.shape;
 
-    btn.appendChild(img);
+    // title 속성을 쓰면 브라우저 기본 말풍선이 떠서 쓰지 않음
+    if (clue.label) btn.setAttribute("aria-label", clue.label);
 
     btn.addEventListener("click", () => {
       // 같은 사건에서 동일한 단서를 여러 번 눌러도 한 번만 계산
@@ -362,87 +327,98 @@ function closeCluePopup() {
   document.getElementById("clue-popup").classList.add("hidden");
 }
 
-// ---------- [추가] 좌표 측정 도구 ----------
+// ---------- 좌표 측정 도구 ----------
 // 사용법: 사건 화면 주소 끝에 &debug=1 을 붙여서 열고,
 //        이미지에서 힌트로 쓸 물건 위를 마우스로 드래그해서 사각형을 그리면
 //        화면 위쪽에 "position" 값이 나타나고 클립보드에도 복사됩니다.
 //        그 값을 JSON의 해당 clue 안에 붙여넣으면 끝.
 function enableClueDebug() {
-    const stage = document.getElementById("clue-markers");
-    const area = document.querySelector(".scene-bg");
+  const stage = document.getElementById("clue-markers");
+  const area = document.querySelector(".scene-bg");
 
-    const box = document.createElement("div");
-    box.style.cssText =
-        "position:absolute;border:2px dashed #00e5ff;background:rgba(0,229,255,.25);" +
-        "pointer-events:none;z-index:999;display:none";
-    stage.appendChild(box);
+  const box = document.createElement("div");
+  box.style.cssText =
+    "position:absolute;border:2px dashed #00e5ff;background:rgba(0,229,255,.25);" +
+    "pointer-events:none;z-index:999;display:none";
+  stage.appendChild(box);
 
-    const panel = document.createElement("div");
-    panel.style.cssText =
-        "position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:99999;" +
-        "background:#000;color:#0ff;font:13px/1.5 monospace;padding:8px 14px;" +
-        "border-radius:8px;max-width:92vw;user-select:text;";
-    panel.textContent = "좌표 측정 모드: 물건 위를 드래그해 보세요";
-    document.body.appendChild(panel);
+  const panel = document.createElement("div");
+  panel.style.cssText =
+    "position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:99999;" +
+    "background:#000;color:#0ff;font:13px/1.5 monospace;padding:8px 14px;" +
+    "border-radius:8px;max-width:92vw;user-select:text;";
+  panel.textContent = "좌표 측정 모드: 물건 위를 드래그해 보세요";
+  document.body.appendChild(panel);
 
-    let startX = 0, startY = 0, drawing = false, moved = false;
+  let startX = 0,
+    startY = 0,
+    drawing = false,
+    moved = false;
 
-    const pointIn = (e) => {
-        const r = stage.getBoundingClientRect();
-        return { x: e.clientX - r.left, y: e.clientY - r.top };
-    };
+  const pointIn = (e) => {
+    const r = stage.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  };
 
-    area.addEventListener("mousedown", (e) => {
-        if (e.target.closest(".arrow-btn, .story-box")) return;
+  area.addEventListener(
+    "mousedown",
+    (e) => {
+      if (e.target.closest(".arrow-btn, .story-box")) return;
+      e.preventDefault();
+      const p = pointIn(e);
+      startX = p.x;
+      startY = p.y;
+      drawing = true;
+      moved = false;
+      box.style.display = "block";
+      box.style.left = startX + "px";
+      box.style.top = startY + "px";
+      box.style.width = "0px";
+      box.style.height = "0px";
+    },
+    true,
+  );
+
+  window.addEventListener("mousemove", (e) => {
+    if (!drawing) return;
+    moved = true;
+    const p = pointIn(e);
+    box.style.left = Math.min(startX, p.x) + "px";
+    box.style.top = Math.min(startY, p.y) + "px";
+    box.style.width = Math.abs(p.x - startX) + "px";
+    box.style.height = Math.abs(p.y - startY) + "px";
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (!drawing) return;
+    drawing = false;
+    if (!moved) return;
+
+    const r = stage.getBoundingClientRect();
+    const pct = (v, total) => ((v / total) * 100).toFixed(1) + "%";
+    const text =
+      `"position": { "top": "${pct(parseFloat(box.style.top), r.height)}", ` +
+      `"left": "${pct(parseFloat(box.style.left), r.width)}", ` +
+      `"width": "${pct(parseFloat(box.style.width), r.width)}", ` +
+      `"height": "${pct(parseFloat(box.style.height), r.height)}" }`;
+
+    panel.textContent = text;
+    console.log(text);
+    if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+  });
+
+  // 드래그 직후 힌트 팝업이 열리지 않게 막기
+  area.addEventListener(
+    "click",
+    (e) => {
+      if (moved) {
+        e.stopPropagation();
         e.preventDefault();
-        const p = pointIn(e);
-        startX = p.x;
-        startY = p.y;
-        drawing = true;
         moved = false;
-        box.style.display = "block";
-        box.style.left = startX + "px";
-        box.style.top = startY + "px";
-        box.style.width = "0px";
-        box.style.height = "0px";
-    }, true);
-
-    window.addEventListener("mousemove", (e) => {
-        if (!drawing) return;
-        moved = true;
-        const p = pointIn(e);
-        box.style.left = Math.min(startX, p.x) + "px";
-        box.style.top = Math.min(startY, p.y) + "px";
-        box.style.width = Math.abs(p.x - startX) + "px";
-        box.style.height = Math.abs(p.y - startY) + "px";
-    });
-
-    window.addEventListener("mouseup", () => {
-        if (!drawing) return;
-        drawing = false;
-        if (!moved) return;
-
-        const r = stage.getBoundingClientRect();
-        const pct = (v, total) => ((v / total) * 100).toFixed(1) + "%";
-        const text =
-            `"position": { "top": "${pct(parseFloat(box.style.top), r.height)}", ` +
-            `"left": "${pct(parseFloat(box.style.left), r.width)}", ` +
-            `"width": "${pct(parseFloat(box.style.width), r.width)}", ` +
-            `"height": "${pct(parseFloat(box.style.height), r.height)}" }`;
-
-        panel.textContent = text;
-        console.log(text);
-        if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
-    });
-
-    // 드래그 직후 힌트 팝업이 열리지 않게 막기
-    area.addEventListener("click", (e) => {
-        if (moved) {
-            e.stopPropagation();
-            e.preventDefault();
-            moved = false;
-        }
-    }, true);
+      }
+    },
+    true,
+  );
 }
 
 // ---------- 2단계: 범인 선택 화면 ----------
@@ -459,7 +435,7 @@ function renderSuspectScene(level) {
 
     const img = document.createElement("img");
     img.alt = suspect.name;
-    setImageWithFallback(img, getSuspectIconPath(suspect));
+    setImageWithFallback(img, getSuspectIconCandidates(suspect));
 
     const label = document.createElement("span");
     label.textContent = suspect.name;
@@ -523,6 +499,7 @@ function showResultPopup(text, buttonText = "확인") {
 
   document.getElementById("result-popup").classList.remove("hidden");
 }
+
 function closeResultPopup() {
   document.getElementById("result-popup").classList.add("hidden");
 
@@ -533,6 +510,7 @@ function closeResultPopup() {
   shouldMoveNext = false;
   moveToNextScenario();
 }
+
 // ---------- 현재 사건 표시 ----------
 function showCurrentScenario() {
   currentLevel = levelDataList[currentScenarioIndex];
@@ -598,10 +576,15 @@ function finishLevel() {
 function switchScene(fromId, toId) {
   document.getElementById(fromId).classList.remove("active");
   document.getElementById(toId).classList.add("active");
+
+  // 숨겨져 있던 사건 화면이 다시 보일 때 힌트 구역 층 크기를 다시 계산
+  layoutClueLayer();
 }
+
 // ---------- 레벨별 배경음악 ----------
 function initBgm(level) {
   const bgmButton = document.getElementById("bgm-toggle");
+  if (!bgmButton) return;
 
   // level이 1~5가 아니면 기본적으로 1단계 음악 사용
   const validLevels = ["1", "2", "3", "4", "5"];
@@ -674,14 +657,15 @@ async function init() {
   totalAttempts = 0;
   totalClueCount = 0;
 
-  const bgImg = document.getElementById("bg-image");
-  bgImg.addEventListener("load", layoutClueLayer);
+  // 이미지가 로드되거나 창 크기가 바뀔 때마다 힌트 구역 층을 이미지에 다시 맞춤
+  document.getElementById("bg-image").addEventListener("load", layoutClueLayer);
   window.addEventListener("resize", layoutClueLayer);
 
   startTimer();
   showCurrentScenario();
-  layoutClueLayer();
+  layoutClueLayer(); // 이미 캐시된 이미지일 때 대비
 
+  // 주소 끝에 &debug=1 이 있으면 좌표 측정 도구 켜기
   if (new URLSearchParams(location.search).get("debug") === "1") {
     enableClueDebug();
   }
@@ -693,7 +677,6 @@ async function init() {
 
   document.getElementById("back-btn").addEventListener("click", () => {
     switchScene("scene-suspects", "scene-story");
-    layoutClueLayer();
   });
 
   document.getElementById("check-btn").addEventListener("click", () => {
