@@ -677,6 +677,7 @@ async function init() {
 
   document.getElementById("back-btn").addEventListener("click", () => {
     switchScene("scene-suspects", "scene-story");
+    layoutClueLayer();
   });
 
   document.getElementById("check-btn").addEventListener("click", () => {

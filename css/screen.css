@@ -59,14 +59,14 @@ body {
 
 /* JS sizes this layer to the visible image area so JSON coordinates stay aligned. */
 #clue-markers {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
 }
 
 #clue-markers .clue-marker {
-    pointer-events: auto;
+  pointer-events: auto;
 }
 
 .top-bar {
@@ -92,7 +92,7 @@ body {
     border-radius: 20px;
 }
 
-/* ---------- 단서 조사 영역 (투명 상호작용 영역 & 호버 효과) ---------- */
+/* ---------- 단서 조사 영역 ---------- */
 .clue-marker {
     position: absolute;
     width: 80px;
@@ -112,7 +112,6 @@ body {
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
 }
 
-/* 스토리 텍스트 박스 */
 .story-box {
     position: absolute;
     bottom: 90px;
@@ -204,16 +203,13 @@ body {
     }
 }
 
-/* ---------- 2단계: 범인 선택 화면 ----------
-   디자인 시안(1195 x 766 기준)의 위치/크기를 vw, vh 비율로 환산해서
-   화면 크기가 달라져도 같은 비율로 보이도록 했습니다. */
+/* ---------- 2단계: 범인 선택 화면 ---------- */
 #scene-suspects {
     padding: 0;
     background: #111827;
     overflow: hidden;
 }
 
-/* 뒤로가기 화살표 */
 #scene-suspects .back-link {
     position: absolute;
     top: 8.8vh;
@@ -229,7 +225,6 @@ body {
     cursor: pointer;
 }
 
-/* 상단 바: 제목(왼쪽) + 타이머(오른쪽) */
 #scene-suspects .top-bar.center {
     position: absolute;
     top: 0;
@@ -265,7 +260,6 @@ body {
     color: #e8e8ec;
 }
 
-/* 용의자 카드 영역 */
 .suspect-grid {
     position: absolute;
     top: 25vh;
@@ -326,7 +320,6 @@ body {
     background: #272d45;
 }
 
-/* 정답 확인 버튼 (시안: 오른쪽 아래, 카드 영역 오른쪽 끝에 맞춤) */
 .check-btn {
     position: absolute;
     right: 5.1vw;
@@ -351,7 +344,7 @@ body {
     filter: brightness(1.05);
 }
 
-/* ---------- 팝업 공통 ---------- */
+/* ---------- 팝업 ---------- */
 .popup {
     position: fixed;
     inset: 0;
