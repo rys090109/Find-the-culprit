@@ -62,7 +62,7 @@
   {
     "id": "level3_scenario3",
     "title": "아파트 엘리베이터 CCTV 파손 사건",
-    "background": "D",
+    "background": "elevator",
     "story": "아파트 엘리베이터 CCTV가 고의로 파손됐다. 파손 직후 한 입주민이 갑자기 이사를 서두르기 시작했다는 이야기가 돌았다.",
     "clues": [
       {

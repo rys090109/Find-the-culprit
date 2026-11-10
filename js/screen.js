@@ -10,7 +10,11 @@ const BACKGROUND_MAP = {
   animal: "animal.png",
   festivities: "festivities.png",
   festival: "festivities.png",
-  d: "elevator.png",
+  elevator: "elevator.png",
+  cruise: "Cruise.png",
+  art_gallery: "art_gallery.png",
+  customer: "customer.png",
+  fishhook: "fishhook.png",
 
   workshop: "Workshop.png",
   ticket: "Ticket.png",
@@ -92,6 +96,20 @@ const SUSPECT_ICON_MAP = {
   theater_manager: "Ticket2.png",
   employee: "Ticket3.png",
   theater_actor: "Ticket4.png",
+
+  // level3 suspects[].id
+  office_staff: "elevator1.png",
+  electrician: "elevator2.png",
+  resident: "elevator3.png",
+  moving_staff: "elevator4.png",
+  cs_agent: "customer1.png",
+  shop_ceo: "customer2.png",
+  outsourced_dev: "customer3.png",
+  warehouse_staff: "customer4.png",
+  boat_mechanic: "fishhook1.png",
+  fishing_owner: "fishhook2.png",
+  passenger: "fishhook3.png",
+  outsourced_mechanic: "fishhook4.png",
 };
 
 // ---------- 게임 진행 상태 ----------
@@ -482,6 +500,7 @@ function renderSuspectScene(level) {
 
   const grid = document.getElementById("suspect-grid");
   grid.innerHTML = "";
+  grid.style.setProperty("--suspect-count", level.suspects.length);
 
   level.suspects.forEach((suspect) => {
     const item = document.createElement("button");
