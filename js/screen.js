@@ -256,7 +256,7 @@ function renderStoryScene(level) {
 function layoutClueLayer() {
   const img = document.getElementById("bg-image");
   const layer = document.getElementById("clue-markers");
-  if (!img || !layer || !img.naturalWidth) return;
+  if (!img || !layer) return;
 
   const area = img.parentElement;
   if (layer.parentElement !== area) area.appendChild(layer);
@@ -264,6 +264,16 @@ function layoutClueLayer() {
   const W = area.clientWidth;
   const H = area.clientHeight;
   if (!W || !H) return; // 다른 화면이 켜져 있어서 크기를 잴 수 없을 때
+
+  // 이미지 로드 전/실패 시에는 화면 전체를 기준으로 사용 (힌트 구역이 사라지지 않게)
+  if (!img.naturalWidth) {
+    layer.style.position = "absolute";
+    layer.style.width = W + "px";
+    layer.style.height = H + "px";
+    layer.style.left = "0px";
+    layer.style.top = "0px";
+    return;
+  }
 
   const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
   const w = img.naturalWidth * scale;
@@ -274,6 +284,44 @@ function layoutClueLayer() {
   layer.style.height = h + "px";
   layer.style.left = (W - w) / 2 + "px";
   layer.style.top = (H - h) / 2 + "px";
+}
+
+// ---------- 힌트 영역 최소 크기 보장 ----------
+// %로 적힌 좌표는 너무 작으면 열쇠 위에 올려도 반응하지 않을 수 있음.
+// 중심점은 그대로 두고, 가로 6% x 세로 9%보다 작으면 그 크기까지 키움.
+// (px 단위로 적힌 좌표는 그대로 사용)
+const MIN_CLUE_W = 6;
+const MIN_CLUE_H = 9;
+
+function expandClueBox(pos) {
+  const parse = (v) =>
+    typeof v === "string" && v.trim().endsWith("%") ? parseFloat(v) : null;
+
+  const top = parse(pos.top);
+  const left = parse(pos.left);
+  const w = parse(pos.width);
+  const h = parse(pos.height);
+
+  if ([top, left, w, h].some((v) => v === null || Number.isNaN(v))) {
+    return {
+      top: pos.top,
+      left: pos.left,
+      width: pos.width || "80px",
+      height: pos.height || "80px",
+    };
+  }
+
+  const nw = Math.max(w, MIN_CLUE_W);
+  const nh = Math.max(h, MIN_CLUE_H);
+  const nLeft = Math.min(Math.max(left - (nw - w) / 2, 0), 100 - nw);
+  const nTop = Math.min(Math.max(top - (nh - h) / 2, 0), 100 - nh);
+
+  return {
+    top: nTop.toFixed(1) + "%",
+    left: nLeft.toFixed(1) + "%",
+    width: nw.toFixed(1) + "%",
+    height: nh.toFixed(1) + "%",
+  };
 }
 
 function renderClueMarkers(clues) {
@@ -293,10 +341,11 @@ function renderClueMarkers(clues) {
     btn.className = "clue-marker";
 
     // 위치 및 너비/높이 동적 할당
-    btn.style.top = pos.top;
-    btn.style.left = pos.left;
-    btn.style.width = pos.width || "80px";
-    btn.style.height = pos.height || "80px";
+    const box = expandClueBox(pos);
+    btn.style.top = box.top;
+    btn.style.left = box.left;
+    btn.style.width = box.width;
+    btn.style.height = box.height;
 
     // 물건 모양대로 구역을 깎고 싶을 때: position에 "shape": "polygon(...)" 추가
     if (pos.shape) btn.style.clipPath = pos.shape;
@@ -333,6 +382,12 @@ function closeCluePopup() {
 //        화면 위쪽에 "position" 값이 나타나고 클립보드에도 복사됩니다.
 //        그 값을 JSON의 해당 clue 안에 붙여넣으면 끝.
 function enableClueDebug() {
+  // 디버그 모드에서는 모든 힌트 영역을 파란 점선 박스로 항상 표시
+  const outlineStyle = document.createElement("style");
+  outlineStyle.textContent =
+    ".clue-marker{border:2px dashed #00e5ff !important;background:rgba(0,229,255,.15) !important;}";
+  document.head.appendChild(outlineStyle);
+
   const stage = document.getElementById("clue-markers");
   const area = document.querySelector(".scene-bg");
 

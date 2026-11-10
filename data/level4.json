@@ -1,0 +1,167 @@
+[
+  {
+    "id": "level4_scenario1",
+    "title": "아파트 단지 택배 도난 사건",
+    "background": "Theft",
+    "story": "공동현관 택배 중 노트북이 든 택배만 사라졌다. 다른 택배는 그대로라 고가 물품인 걸 미리 알았던 사람의 계획적 범행으로 보인다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "우편함 111호 조사하기",
+        "text": "택배기사는 배송 후 다른 동으로 이동한 GPS 기록이 확인됐다.",
+        "position": { "top": "4.7%", "left": "46.3%", "width": "5.2%", "height": "5.8%" }
+      },
+      {
+        "id": "key2",
+        "label": "우편함 113호 조사하기",
+        "text": "도난 택배는 겉모습만으로 고가 물품인지 알 수 없었는데, 피해자가 며칠 전 \"노트북을 새로 샀다\"고 말한 자리에 같은 층 주민이 있었다.",
+        "position": { "top": "47%", "left": "13.9%", "width": "4.2%", "height": "6%" }
+      },
+      {
+        "id": "key3",
+        "label": "우편함 136호 조사하기",
+        "text": "같은 층 주민이 사건 직후 \"택배를 대신 가져간다\"며 다시 출입했고, CCTV에 노트북 택배와 크기가 같은 상자를 든 모습이 찍혔다.",
+        "position": { "top": "54.2%", "left": "58%", "width": "3.6%", "height": "5.8%" }
+      }
+    ],
+    "suspects": [
+      { "id": "delivery_driver", "name": "택배기사", "icon": "Theft1" },
+      { "id": "electrician", "name": "전기점검기사", "icon": "Theft2" },
+      { "id": "mover", "name": "이삿짐 기사", "icon": "Theft3" },
+      { "id": "floor_neighbor", "name": "같은 층 주민", "icon": "Theft4" }
+    ],
+    "answer": "floor_neighbor"
+  },
+  {
+    "id": "level4_scenario2",
+    "title": "미술 대회 수상작 바꿔치기 사건",
+    "background": "art",
+    "story": "시상식 날 전시된 수상작이 원본과 미묘하게 다른 그림으로 바뀌어 있었다. 전시 준비 중 원본을 마지막으로 옮긴 사람이 유력하다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "벽에 걸린 그림 조사하기",
+        "text": "미술 선생님은 시상식 직전까지 원본을 확인했고, 낙선한 경쟁자는 전시장 출입증이 없었다.",
+        "position": { "top": "17.8%", "left": "16.8%", "width": "3.8%", "height": "5.2%" }
+      },
+      {
+        "id": "key2",
+        "label": "벽시계 조사하기",
+        "text": "원작자의 친구는 다른 곳에 있었다는 알리바이가 확인됐다.",
+        "position": { "top": "21%", "left": "51.8%", "width": "3.8%", "height": "4.2%" }
+      },
+      {
+        "id": "key3",
+        "label": "이젤 조사하기",
+        "text": "전시 설치 담당 학생이 원본을 옮긴 직후부터 CCTV 각도가 살짝 틀어져 있었다.",
+        "position": { "top": "51%", "left": "89.8%", "width": "3.6%", "height": "5.4%" }
+      }
+    ],
+    "suspects": [
+      { "id": "install_student", "name": "전시 설치 담당 학생", "icon": "art1" },
+      { "id": "art_teacher", "name": "미술 선생님", "icon": "art2" },
+      { "id": "rival", "name": "낙선한 경쟁자", "icon": "art3" },
+      { "id": "friend", "name": "원작자 친구", "icon": "art4" }
+    ],
+    "answer": "install_student"
+  },
+  {
+    "id": "level4_scenario3",
+    "title": "회사 신제품 기밀 유출 사건",
+    "background": "company",
+    "story": "출시 전 신제품 디자인이 경쟁사 광고에 먼저 등장했다. 파일은 반출 시 로그가 남는 시스템으로 관리됐는데, 로그엔 이상 흔적이 없었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "천장 조명 조사하기",
+        "text": "마케팅팀장은 출시 이후 자료만 받았고, 개발팀장은 그 시각 해외 출장 중이었다.",
+        "position": { "top": "3.4%", "left": "75%", "width": "3.2%", "height": "4.8%" }
+      },
+      {
+        "id": "key2",
+        "label": "벽시계 조사하기",
+        "text": "보안팀 로그에 이상 반출 흔적이 없었다.",
+        "position": { "top": "27.8%", "left": "32%", "width": "3.2%", "height": "4.4%" }
+      },
+      {
+        "id": "key3",
+        "label": "탁상 달력 조사하기",
+        "text": "인턴 계정에서 파일이 개인 클라우드로 업로드된 기록이 발견됐다.",
+        "position": { "top": "61.8%", "left": "44.4%", "width": "3.1%", "height": "3.6%" }
+      }
+    ],
+    "suspects": [
+      { "id": "dev_intern", "name": "개발팀 인턴", "icon": "company1" },
+      { "id": "marketing_lead", "name": "마케팅팀장", "icon": "company2" },
+      { "id": "dev_lead", "name": "개발팀장", "icon": "company3" },
+      { "id": "security_staff", "name": "보안팀 직원", "icon": "company4" }
+    ],
+    "answer": "dev_intern"
+  },
+  {
+    "id": "level4_scenario4",
+    "title": "카지노칩 조작 사건",
+    "background": "casino",
+    "story": "카지노 특정 색 칩 개수가 장부와 반복해서 맞지 않았다. 자동 기록 시스템상 오차가 발생하는 시간대가 특정 근무조에 몰려 있었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "샹들리에 조사하기",
+        "text": "카지노 매니저는 정산만 담당하고 테이블에 접근하지 않으며, 단골 고객은 보관함에 접근할 수 없다.",
+        "position": { "top": "14.6%", "left": "48.4%", "width": "2.8%", "height": "4.5%" }
+      },
+      {
+        "id": "key2",
+        "label": "왼쪽 간판 조사하기",
+        "text": "칩 관리 기술자는 그 주에 점검하지 않았다.",
+        "position": { "top": "32%", "left": "13.8%", "width": "3.6%", "height": "5.5%" }
+      },
+      {
+        "id": "key3",
+        "label": "카지노 테이블 조사하기",
+        "text": "오차가 발생한 시간대와 야간 담당 딜러의 근무 기록이 정확히 겹쳤다.",
+        "position": { "top": "66%", "left": "91.3%", "width": "3.2%", "height": "3.5%" }
+      }
+    ],
+    "suspects": [
+      { "id": "night_dealer", "name": "야간 담당딜러", "icon": "casino1" },
+      { "id": "casino_manager", "name": "카지노 매니저", "icon": "casino2" },
+      { "id": "regular_guest", "name": "단골 고객", "icon": "casino3" },
+      { "id": "chip_technician", "name": "칩 관리기술자", "icon": "casino4" }
+    ],
+    "answer": "night_dealer"
+  },
+  {
+    "id": "level4_scenario5",
+    "title": "매장 매출 조작 횡령 사건",
+    "background": "sales",
+    "story": "한 매장의 일일 매출이 실제 결제 건수보다 지속적으로 적게 보고됐다. 차액이 발생한 날짜가 특정 마감 담당자의 근무일과 반복해서 겹쳤다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "왼쪽 간판 조사하기",
+        "text": "매장 점주는 주 1회만 정산을 확인했고, 주간 근무직원은 마감 권한이 없다.",
+        "position": { "top": "33.5%", "left": "4%", "width": "4.8%", "height": "7%" }
+      },
+      {
+        "id": "key2",
+        "label": "파란 차양 조사하기",
+        "text": "본사 회계팀직원은 보고된 수치만 집계한다.",
+        "position": { "top": "51.7%", "left": "50.4%", "width": "3.7%", "height": "3.9%" }
+      },
+      {
+        "id": "key3",
+        "label": "오른쪽 간판 조사하기",
+        "text": "차액 발생일이 모두 야간 마감 매니저의 근무일과 겹쳤고, 마감 이후 시점의 비정상적인 결제 취소 기록이 발견됐다.",
+        "position": { "top": "43%", "left": "90.6%", "width": "4%", "height": "6.5%" }
+      }
+    ],
+    "suspects": [
+      { "id": "night_closing_manager", "name": "야간 마감 매니저", "icon": "sales1" },
+      { "id": "store_owner", "name": "매장 점주", "icon": "sales2" },
+      { "id": "day_staff", "name": "주간 근무직원", "icon": "sales3" },
+      { "id": "hq_accountant", "name": "본사 회계팀직원", "icon": "sales4" }
+    ],
+    "answer": "night_closing_manager"
+  }
+]

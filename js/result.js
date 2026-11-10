@@ -45,7 +45,6 @@ async function initResultPage() {
 
   const result = JSON.parse(savedResult);
 
-<<<<<<<<< Temporary merge branch 1
   const {
     level,
     correctCount,
@@ -60,7 +59,6 @@ async function initResultPage() {
   const averageClues =
     caseCount > 0 ? Number((clueCount / caseCount).toFixed(1)) : 0;
 
-<<<<<<<<< Temporary merge branch 1
   const score = calculateRankingScore(correctCount, clueCount, clearTime);
   const detectiveType = getDetectiveType(accuracy, averageClues);
 

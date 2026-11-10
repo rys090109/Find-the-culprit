@@ -1,26 +1,26 @@
 [
-    {
+  {
     "id": "level3_scenario1",
     "title": "크루즈 선원 실종 사건",
     "background": "Cruise",
     "story": "심야 항해 중 승객 한 명이 사라졌고, 다음 날 선내 창고에서 숨진 채 발견됐다. 배는 폐쇄된 공간이라 범인은 반드시 배 안에 있다.",
     "clues": [
-    {
-      "id": "key1",
-      "label": "TODO",
-      "text": "피해자는 마지막으로 선내 바에서 목격됐다."
-    },
-    {
-      "id": "key2",
-      "label": "TODO",
-      "text": "사건 시간 갑판 출입 기록에는 기관실 직원과 바텐더만 있었고, 기관실 직원은 같은 시간 점검 중이던 모습이 CCTV에 찍혔다."
-    },
-    {
-      "id": "key3",
-      "label": "TODO",
-      "text": "혈액에서 수면제가 검출됐고 마지막 음료는 칵테일이었는데, 바텐더 작업대에서 동일한 칵테일 잔이 발견됐다."
-    }
-  ],
+      {
+        "id": "key1",
+        "text": "피해자는 마지막으로 선내 바에서 목격됐다.",
+        "position": { "top": "30%", "left": "10%", "width": "10%", "height": "15%" }
+      },
+      {
+        "id": "key2",
+        "text": "사건 시간 갑판 출입 기록에는 기관실 직원과 바텐더만 있었고, 기관실 직원은 같은 시간 점검 중이던 모습이 CCTV에 찍혔다.",
+        "position": { "top": "30%", "left": "45%", "width": "10%", "height": "15%" }
+      },
+      {
+        "id": "key3",
+        "text": "혈액에서 수면제가 검출됐고 마지막 음료는 칵테일이었는데, 바텐더 작업대에서 동일한 칵테일 잔이 발견됐다.",
+        "position": { "top": "30%", "left": "78%", "width": "10%", "height": "15%" }
+      }
+    ],
     "suspects": [
       { "id": "Cruise1", "name": "선장", "icon": "Cruise1" },
       { "id": "Cruise2", "name": "셰프", "icon": "Cruise2" },
@@ -28,66 +28,132 @@
       { "id": "Cruise4", "name": "기관실 직원", "icon": "Cruise4" }
     ],
     "answer": "Cruise3"
-    },
-    {
+  },
+  {
     "id": "level3_scenario2",
     "title": "미술관 그림 도난 사건",
     "background": "art_gallery",
-    "story": "간 경비 중이던 미술관에서 고가의 그림이 사라졌다. 경보가 울리지 않은 걸 보면 정식으로 경보를 해제할 권한을 가진 사람의 소행이다.",
+    "story": "야간 경비 중이던 미술관에서 고가의 그림이 사라졌다. 경보가 울리지 않은 걸 보면 정식으로 경보를 해제할 권한을 가진 사람의 소행이다.",
     "clues": [
-    {
-      "id": "key1",
-      "label": "TODO",
-      "text": "큐레이터는 그 시각 출입 기록이 없었고, 청소 용역 직원은 경보 해제 권한이 없다."
-    },
-    {
-      "id": "key2",
-      "label": "TODO",
-      "text": "보안업체 관리자는 원격으로만 접근 가능해 현장에 없었다."
-    },
-    {
-      "id": "key3",
-      "label": "TODO",
-      "text": "경보 해제 기록이 야간 경비원의 출입 카드와 일치했고, 빈 액자 뒤에서 경비원 장갑 섬유가 발견됐다."
-    }
-  ],
-  "suspects": [
-    { "id": "art_gallery1", "name": "큐레이터", "icon": "art_gallery1" },
-    { "id": "art_gallery2", "name": "청소 용역 직원", "icon": "art_gallery2" },
-    { "id": "art_gallery3", "name": "보안업체 관리자", "icon": "art_gallery3" },
-    { "id": "art_gallery4", "name": "야간 경비원", "icon": "art_gallery4" }
-  ],
-  "answer": "art_gallery4"
-},
-{
-  "id": "level3_scenario3",
-  "title": "아파트 엘리베이터 CCTV 파손 사건",
-  "background": "D",
-  "story": "아파트 엘리베이터 CCTV가 고의로 파손됐다. 파손 직후 한 입주민이 갑자기 이사를 서두르기 시작했다는 이야기가 돌았다.",
-  "clues": [
-    {
-      "id": "key1",
-      "label": "TODO",
-      "text": "관리사무소 직원은 파손 시각 관제실에 있었고, 전기 기사는 다른 동에서 작업 중이었다."
-    },
-    {
-      "id": "key2",
-      "label": "TODO",
-      "text": "이사업체 직원은 파손 다음 날 처음 방문했다."
-    },
-    {
-      "id": "key3",
-      "label": "TODO",
-      "text": "파손 직후 입주민이 이사 일정을 앞당긴 사실이 확인됐고, CCTV 사각지대로 이동하는 인물의 옷차림이 그 입주민과 일치했다."
-    }
-  ],
-  "suspects": [
-    { "id": "office_staff", "name": "관리사무소 직원", "icon": "TODO" },
-    { "id": "electrician", "name": "전기 기사", "icon": "TODO" },
-    { "id": "resident", "name": "해당 라인 입주민", "icon": "TODO" },
-    { "id": "moving_staff", "name": "이사업체 직원", "icon": "TODO" }
-  ],
-  "answer": "resident",
-  "explanation": "파손 직후 이사 일정을 앞당긴 사실이 확인됐고, CCTV 사각지대로 이동하는 인물의 옷차림이 해당 라인 입주민과 일치했다."
-}
+      {
+        "id": "key1",
+        "text": "큐레이터는 그 시각 출입 기록이 없었고, 청소 용역 직원은 경보 해제 권한이 없다.",
+        "position": { "top": "30%", "left": "10%", "width": "10%", "height": "15%" }
+      },
+      {
+        "id": "key2",
+        "text": "보안업체 관리자는 원격으로만 접근 가능해 현장에 없었다.",
+        "position": { "top": "30%", "left": "45%", "width": "10%", "height": "15%" }
+      },
+      {
+        "id": "key3",
+        "text": "경보 해제 기록이 야간 경비원의 출입 카드와 일치했고, 빈 액자 뒤에서 경비원 장갑 섬유가 발견됐다.",
+        "position": { "top": "30%", "left": "78%", "width": "10%", "height": "15%" }
+      }
+    ],
+    "suspects": [
+      { "id": "art_gallery1", "name": "큐레이터", "icon": "art_gallery1" },
+      { "id": "art_gallery2", "name": "청소 용역 직원", "icon": "art_gallery2" },
+      { "id": "art_gallery3", "name": "보안업체 관리자", "icon": "art_gallery3" },
+      { "id": "art_gallery4", "name": "야간 경비원", "icon": "art_gallery4" }
+    ],
+    "answer": "art_gallery4"
+  },
+  {
+    "id": "level3_scenario3",
+    "title": "아파트 엘리베이터 CCTV 파손 사건",
+    "background": "D",
+    "story": "아파트 엘리베이터 CCTV가 고의로 파손됐다. 파손 직후 한 입주민이 갑자기 이사를 서두르기 시작했다는 이야기가 돌았다.",
+    "clues": [
+      {
+        "id": "key1",
+        "text": "관리사무소 직원은 파손 시각 관제실에 있었고, 전기 기사는 다른 동에서 작업 중이었다.",
+        "position": { "top": "30%", "left": "10%", "width": "10%", "height": "15%" }
+      },
+      {
+        "id": "key2",
+        "text": "이사업체 직원은 파손 다음 날 처음 방문했다.",
+        "position": { "top": "30%", "left": "45%", "width": "10%", "height": "15%" }
+      },
+      {
+        "id": "key3",
+        "text": "파손 직후 입주민이 이사 일정을 앞당긴 사실이 확인됐고, CCTV 사각지대로 이동하는 인물의 옷차림이 그 입주민과 일치했다.",
+        "position": { "top": "30%", "left": "78%", "width": "10%", "height": "15%" }
+      }
+    ],
+    "suspects": [
+      { "id": "office_staff", "name": "관리사무소 직원" },
+      { "id": "electrician", "name": "전기 기사" },
+      { "id": "resident", "name": "해당 라인 입주민" },
+      { "id": "moving_staff", "name": "이사업체 직원" }
+    ],
+    "answer": "resident",
+    "explanation": "파손 직후 이사 일정을 앞당긴 사실이 확인됐고, CCTV 사각지대로 이동하는 인물의 옷차림이 해당 라인 입주민과 일치했다."
+  },
+  {
+    "id": "level3_scenario4",
+    "title": "고객 정보 유출 사건",
+    "background": "customer",
+    "story": "쇼핑몰 고객정보가 외부로 유출됐다. 유출 데이터에 상담 기록까지 포함돼 있어, 그 두 데이터를 동시에 다루는 시스템에 접근한 사람이 유력하다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "상단 모니터 조사하기",
+        "text": "쇼핑몰 대표는 개인정보 시스템에 직접 접근하지 않고, 물류창고 직원은 배송지 정보만 본다.",
+        "position": { "top": "22.5%", "left": "55.7%", "width": "8%", "height": "8.8%" }
+      },
+      {
+        "id": "key2",
+        "label": "벽면 패널 조사하기",
+        "text": "외주 개발자는 계약 종료 후 권한이 삭제됐다.",
+        "position": { "top": "47%", "left": "2.5%", "width": "4.5%", "height": "8.5%" }
+      },
+      {
+        "id": "key3",
+        "label": "하단 모니터 조사하기",
+        "text": "유출 데이터에 상담 기록까지 포함돼 있었고, 상담원 계정에서 대량 다운로드 로그가 발견됐다.",
+        "position": { "top": "54.5%", "left": "25.9%", "width": "10%", "height": "9.7%" }
+      }
+    ],
+    "suspects": [
+      { "id": "cs_agent", "name": "고객센터 상담원", "icon": "customer1" },
+      { "id": "shop_ceo", "name": "쇼핑몰 대표", "icon": "customer2" },
+      { "id": "outsourced_dev", "name": "외주 개발자", "icon": "customer3" },
+      { "id": "warehouse_staff", "name": "물류창고 직원", "icon": "customer4" }
+    ],
+    "answer": "cs_agent"
+  },
+  {
+    "id": "level3_scenario5",
+    "title": "낚시터 보트 침몰 사건",
+    "background": "fishhook",
+    "story": "임대 보트가 알 수 없는 이유로 침몰했다. 바닥에서 발견된 흠집 위치가 정기 정비 때 손이 닿는 부위와 정확히 겹쳤다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "보트 깃발 조사하기",
+        "text": "낚시터 사장은 정비 이력에 접근하지 않고, 외주 정비업체 기사는 그 주 방문 기록이 없었다.",
+        "position": { "top": "17%", "left": "30%", "width": "7%", "height": "7%" }
+      },
+      {
+        "id": "key2",
+        "label": "하늘 구름 조사하기",
+        "text": "함께 탑승했던 지인은 정비 지식이 없었다.",
+        "position": { "top": "8%", "left": "79.5%", "width": "4.5%", "height": "5%" }
+      },
+      {
+        "id": "key3",
+        "label": "바다 속 조사하기",
+        "text": "흠집 위치가 정비 담당 직원이 마지막으로 손댄 부위와 일치했고, 보험금 관련 통화 기록이 발견됐다.",
+        "position": { "top": "69%", "left": "86.4%", "width": "4.2%", "height": "7%" }
+      }
+    ],
+    "suspects": [
+      { "id": "boat_mechanic", "name": "보트 정비 직원", "icon": "fishhook1" },
+      { "id": "fishing_owner", "name": "낚시터 사장", "icon": "fishhook2" },
+      { "id": "passenger", "name": "탑승한 사람", "icon": "fishhook3" },
+      { "id": "outsourced_mechanic", "name": "외주 정비 기사", "icon": "fishhook4" }
+    ],
+    "answer": "boat_mechanic"
+  }
 ]

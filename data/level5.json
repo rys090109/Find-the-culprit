@@ -1,0 +1,167 @@
+[
+  {
+    "id": "level5_scenario1",
+    "title": "별장 밀실 살인 사건",
+    "background": "villa",
+    "story": "폭우로 고립된 별장 서재에서 집주인이 숨진 채 발견됐다. 문과 창문은 안에서 잠겨 있었지만, 존재를 아는 사람이 극소수인 비밀 통로가 하나 있었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "지붕 굴뚝 조사하기",
+        "text": "개인 요리사는 비밀 통로의 존재 자체를 몰랐고, 먼 친척은 이번이 첫 방문이었다.",
+        "position": { "top": "12.8%", "left": "37.8%", "width": "4%", "height": "5.6%" }
+      },
+      {
+        "id": "key2",
+        "label": "별장 창문 조사하기",
+        "text": "별장 관리인은 정원에서 배수 작업 중이었다는 증거가 있다.",
+        "position": { "top": "37.3%", "left": "86.4%", "width": "3.5%", "height": "6%" }
+      },
+      {
+        "id": "key3",
+        "label": "수영장 조사하기",
+        "text": "집주인의 유언장이 최근 집사에게 불리하게 변경된 사실이 드러났고, 비밀 통로 안쪽에서 집사의 회중시계 파편이 발견됐다.",
+        "position": { "top": "71.4%", "left": "65.5%", "width": "5%", "height": "5.6%" }
+      }
+    ],
+    "suspects": [
+      { "id": "private_chef", "name": "개인 요리사", "icon": "villa1" },
+      { "id": "old_butler", "name": "오랜 집사", "icon": "villa2" },
+      { "id": "distant_relative", "name": "먼 친척", "icon": "villa3" },
+      { "id": "villa_keeper", "name": "별장 관리인", "icon": "villa4" }
+    ],
+    "answer": "old_butler"
+  },
+  {
+    "id": "level5_scenario2",
+    "title": "심야 열차 독살 사건",
+    "background": "train",
+    "story": "침대열차 승객이 객실에서 숨진 채 발견됐다. 저녁에 마신 차에서 독이 검출됐고, 그 시간 직접 차를 내온 사람은 단 한 명이었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "선반 위 짐 조사하기",
+        "text": "침대칸 승무원은 식당칸에 출입하지 않는 근무 구역이었고, 사업 파트너는 다른 테이블에서 식사했다는 목격자가 있다.",
+        "position": { "top": "30%", "left": "27.7%", "width": "3.2%", "height": "4.8%" }
+      },
+      {
+        "id": "key2",
+        "label": "객차 문 조사하기",
+        "text": "독성 물질은 찻잔에서만 검출돼 잔을 직접 다룬 사람이 유력하며, 의사는 사건 후 응급처치를 시도한 정황만 있다.",
+        "position": { "top": "49.4%", "left": "49.3%", "width": "2.9%", "height": "3.4%" }
+      },
+      {
+        "id": "key3",
+        "label": "객실 좌석 조사하기",
+        "text": "식당칸 승무원이 최근 피해자와 금전 문제로 다퉜다는 동료 진술이 나왔다.",
+        "position": { "top": "58.4%", "left": "88.4%", "width": "2.7%", "height": "4.5%" }
+      }
+    ],
+    "suspects": [
+      { "id": "dining_attendant", "name": "식당칸 승무원", "icon": "train1" },
+      { "id": "sleeper_attendant", "name": "침대칸 승무원", "icon": "train2" },
+      { "id": "business_partner", "name": "사업 파트너", "icon": "train3" },
+      { "id": "doctor", "name": "의사", "icon": "train4" }
+    ],
+    "answer": "dining_attendant"
+  },
+  {
+    "id": "level5_scenario3",
+    "title": "섬 폭풍 고립 살인 사건",
+    "background": "island",
+    "story": "태풍으로 고립된 섬 별장에서 손님이 절벽 아래서 숨진 채 발견됐다. 신발에 묻은 흙이 절벽 근처와 달라, 다른 곳에서 옮겨졌을 가능성이 제기됐다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "먹구름 하늘 조사하기",
+        "text": "섬 관리인의 신발과 흙 성분이 일치하지 않았고, 의사는 응급 키트를 정리하고 있었다는 목격담이 있다.",
+        "position": { "top": "23.8%", "left": "4.4%", "width": "3%", "height": "4.4%" }
+      },
+      {
+        "id": "key2",
+        "label": "다락방 창문 조사하기",
+        "text": "집사는 저녁 식사를 준비 중이었고, 신발에 묻은 흙 성분은 별장 뒤뜰 화단의 흙과 일치했다.",
+        "position": { "top": "23.6%", "left": "62.3%", "width": "2.8%", "height": "4.6%" }
+      },
+      {
+        "id": "key3",
+        "label": "무너진 잔해 조사하기",
+        "text": "옛 동업자의 신발 밑창에서 동일 성분의 흙이 발견됐고, 피해자와 최근 소송 문제가 있었다는 사실이 드러났다.",
+        "position": { "top": "52.7%", "left": "75.4%", "width": "2.8%", "height": "3.3%" }
+      }
+    ],
+    "suspects": [
+      { "id": "island_keeper", "name": "섬 관리인", "icon": "island1" },
+      { "id": "former_partner", "name": "피해자의 옛 동업자", "icon": "island2" },
+      { "id": "invited_doctor", "name": "초대된 의사", "icon": "island3" },
+      { "id": "villa_butler", "name": "별장 집사", "icon": "island4" }
+    ],
+    "answer": "former_partner"
+  },
+  {
+    "id": "level5_scenario4",
+    "title": "미술관 갤러리 오프닝 파티 살인 사건",
+    "background": "party",
+    "story": "오프닝 파티 도중 평론가가 뒤뜰에서 숨진 채 발견됐다. 그는 한 작가를 혹평해 논란이 됐었고, 뒤뜰로 가는 문은 직원 전용 통로 하나뿐이었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "왼쪽 액자 조사하기",
+        "text": "갤러리 관장은 로비에 계속 있었다는 다수의 목격담이 있고, 다른 평론가는 뒤뜰 근처에도 가지 않았다.",
+        "position": { "top": "27.7%", "left": "11%", "width": "4.6%", "height": "6.9%" }
+      },
+      {
+        "id": "key2",
+        "label": "오른쪽 액자 조사하기",
+        "text": "케이터링 직원은 직원 통로 열쇠가 없었다.",
+        "position": { "top": "27.4%", "left": "63.1%", "width": "3.4%", "height": "3.9%" }
+      },
+      {
+        "id": "key3",
+        "label": "아래쪽 액자 조사하기",
+        "text": "직원 전용 통로 카드 출입 기록에 혹평받은 작가의 이름이 남아있었고, 피해자 옷에서 작가가 사용하는 특유의 물감 안료 흔적이 발견됐다.",
+        "position": { "top": "48.1%", "left": "76%", "width": "3.7%", "height": "6.7%" }
+      }
+    ],
+    "suspects": [
+      { "id": "criticized_artist", "name": "혹평받은 작가", "icon": "party1" },
+      { "id": "gallery_director", "name": "갤러리 관장", "icon": "party2" },
+      { "id": "catering_staff", "name": "케이터링 직원", "icon": "party3" },
+      { "id": "other_critic", "name": "다른 평론가", "icon": "party4" }
+    ],
+    "answer": "criticized_artist"
+  },
+  {
+    "id": "level5_scenario5",
+    "title": "방송국 생방송 중 살인 사건",
+    "background": "broadcast",
+    "story": "생방송 도중 출연자가 대기실에서 쓰러져 숨졌다. 음료는 스타일리스트가 준비했지만, 방송 직전 다른 사람이 대기실에 혼자 머문 시간이 CCTV 사각으로 남아 있었다.",
+    "clues": [
+      {
+        "id": "key1",
+        "label": "천장 조명 조사하기",
+        "text": "스타일리스트는 음료 준비 후 다른 대기실에 있었고, PD는 부조종실에서 벗어난 적이 없다는 로그가 있다.",
+        "position": { "top": "29.4%", "left": "57.6%", "width": "2.5%", "height": "4.1%" }
+      },
+      {
+        "id": "key2",
+        "label": "벽면 스피커 조사하기",
+        "text": "매니저는 로비에서 취재진을 응대 중이었다.",
+        "position": { "top": "39%", "left": "24.5%", "width": "3.2%", "height": "4.5%" }
+      },
+      {
+        "id": "key3",
+        "label": "방송 데스크 조사하기",
+        "text": "대기실 CCTV 사각 시간에 출입한 유일한 인물이 경쟁 출연자였고, 최근 배역 문제로 피해자와 갈등을 겪었다는 관계자 진술이 나왔다.",
+        "position": { "top": "52.9%", "left": "75.1%", "width": "2.8%", "height": "3.1%" }
+      }
+    ],
+    "suspects": [
+      { "id": "stylist", "name": "담당 스타일리스트", "icon": "broadcast1" },
+      { "id": "pd", "name": "방송 PD", "icon": "broadcast2" },
+      { "id": "rival_guest", "name": "경쟁 출연자", "icon": "broadcast3" },
+      { "id": "manager", "name": "매니저", "icon": "broadcast4" }
+    ],
+    "answer": "rival_guest"
+  }
+]
